@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('pembimbing_sekolahs', function (Blueprint $table) {
             $table->id('id');
-            $table->string('nama');
+            $table->string('nama')->nullable();
             $table->unsignedBigInteger('angkatan_jurusan_sekolah_id');
-            $table->string('no_telp');
+            $table->string('no_telp')->nullable();
             $table->foreign('angkatan_jurusan_sekolah_id')->references('id')->on('angkatan_jurusan_sekolahs');
             $table->timestamps();
         });

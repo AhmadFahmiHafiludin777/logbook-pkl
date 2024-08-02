@@ -11,10 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('angkatans', function (Blueprint $table) {
-            $table->id('id');
-            $table->year('tahun')->unique();
-            $table->timestamps();
+        Schema::table('sekolahs', function (Blueprint $table) {
+
+            $table->text('alamat')->change();
+            //
         });
     }
 
@@ -23,6 +23,10 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('angkatans');
+        Schema::table('sekolahs', function (Blueprint $table) {
+
+            $table->string('alamat')->change();
+            //
+        });
     }
 };

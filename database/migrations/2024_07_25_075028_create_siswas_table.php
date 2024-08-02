@@ -13,15 +13,15 @@ return new class extends Migration
     {
         Schema::create('siswas', function (Blueprint $table) {
             $table->id('id');
-            $table->string('nama');
+            $table->string('nama')->nullable();
             $table->unsignedBigInteger('angkatan_jurusan_sekolah_id');
-            $table->unsignedBigInteger('pembimbing_lap_id');
+            $table->unsignedBigInteger('pembimbing_lapangan_id');
             $table->unsignedBigInteger('pembimbing_sekolah_id');
-            $table->string('alamat');
-            $table->string('no_telp');
-            $table->string('email')->unique();
+            $table->string('alamat')->nullable();
+            $table->string('no_telp')->nullable();
+            $table->string('email')->unique()->nullable();
             $table->foreign('angkatan_jurusan_sekolah_id')->references('id')->on('angkatan_jurusan_sekolahs');
-            $table->foreign('pembimbing_lap_id')->references('id')->on('pembimbing_laps');
+            $table->foreign('pembimbing_lapangan_id')->references('id')->on('pembimbing_lapangans');
             $table->foreign('pembimbing_sekolah_id')->references('id')->on('pembimbing_sekolahs');
             $table->timestamps();
         });
