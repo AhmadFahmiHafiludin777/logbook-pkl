@@ -17,8 +17,8 @@ class SekolahFactory extends Factory
     public function definition(): array
     {
         return [
-            'nama' => fake()->name(20),
-            'email' => fake()->unique()->safeEmail(),
+            'nama' => fake()->company(),
+            'email' => fake()->unique()->companyEmail(),
             'no_telp' => fake()->phoneNumber(),
             'alamat' => fake()->address()
             //
