@@ -28,14 +28,14 @@ class DatabaseSeeder extends Seeder
         Sekolah::factory(20)->create();
         Jurusan::factory(5)->create();
         JurusanSekolah::factory(20)->create();
-        Angkatan::factory(20)->create();
+        Angkatan::factory(14)->create();
         AngkatanJurusanSekolah::factory(20)->create();
         PembimbingLapangan::factory(10)->create();
         PembimbingSekolah::factory(20)->create();
         Siswa::factory(30)->create();
         Jadwal::factory(50)->create();
         Kegiatan::factory(50)->create();
-        
+
 
         // User::factory()->create([
         //     'name' => 'Test User',

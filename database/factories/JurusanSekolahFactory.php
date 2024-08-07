@@ -20,9 +20,9 @@ class JurusanSekolahFactory extends Factory
     {
         return [
 
-           'sekolah_id' => Sekolah::all()->random()->id,
+           'sekolah_id' => Sekolah::inRandomOrder()->first()->id,
 
-           'jurusan_id' => Jurusan::all()->random()->id
+           'jurusan_id' => Jurusan::inRandomOrder()->first()->id
             //
         ];
     }

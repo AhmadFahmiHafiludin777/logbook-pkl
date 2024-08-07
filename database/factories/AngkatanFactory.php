@@ -17,7 +17,7 @@ class AngkatanFactory extends Factory
     public function definition(): array
     {
         return [
-            'tahun' => fake()->unique()->year(),
+            'tahun' => fake()->unique()->numberBetween(2010, 2024),
             //
         ];
     }

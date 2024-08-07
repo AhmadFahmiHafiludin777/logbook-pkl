@@ -22,9 +22,9 @@ class KegiatanFactory extends Factory
 
             'deskripsi' => fake()->paragraph(),
 
-            'jadwal_id' => Jadwal::all()->random()->id,
+            'jadwal_id' => Jadwal::inRandomOrder()->first()->id,
 
-            'user_id' => User::all()->random()->id,
+            'user_id' => User::inRandomOrder()->first()->id,
 
             'status' => fake()->randomElement(['sudah', 'belum'])
 

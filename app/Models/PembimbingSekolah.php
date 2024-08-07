@@ -11,7 +11,7 @@ class PembimbingSekolah extends Model
     
     protected $fillable = ['nama', 'angkatan_jurusan_sekolah_id', 'no_telp'];
 
-    public function angkatan_jurusan_sekolah(){
+    public function angkatanJurusanSekolah(){
         return $this->belongsTo(AngkatanJurusanSekolah::class);
     }
 }

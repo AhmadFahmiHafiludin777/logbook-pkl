@@ -11,7 +11,7 @@ class AngkatanJurusanSekolah extends Model
     
     protected $fillable = ['jurusan_sekolah_id', 'angkatan_id'];
 
-    public function jurusan_sekolah(){
+    public function jurusanSekolah(){
         return $this->belongsTo(JurusanSekolah::class);
     }
 

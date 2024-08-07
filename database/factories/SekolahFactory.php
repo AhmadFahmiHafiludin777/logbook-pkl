@@ -16,9 +16,16 @@ class SekolahFactory extends Factory
      */
     public function definition(): array
     {
+
+        $jenis = $this->faker->randomElement(['SMKN', 'SMK']);
+        $nomor = $this->faker->numberBetween(1, 10);
+        $kota = $this->faker->city();
+        $nama = "{$jenis} {$nomor} {$kota}";
+        $email = strtolower(str_replace(' ', '', $nama)) . '.sch.id';
+
         return [
-            'nama' => fake()->company(),
-            'email' => fake()->unique()->companyEmail(),
+            'nama' => "{$jenis} {$nomor} {$kota}",
+            'email' => $email,
             'no_telp' => fake()->phoneNumber(),
             'alamat' => fake()->address()
             //

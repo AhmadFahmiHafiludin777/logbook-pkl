@@ -23,11 +23,11 @@ class SiswaFactory extends Factory
             //
             'nama' => fake()->name(20),
 
-            'angkatan_jurusan_sekolah_id' => AngkatanJurusanSekolah::all()->random()->id,
+            'angkatan_jurusan_sekolah_id' => AngkatanJurusanSekolah::inRandomOrder()->first()->id,
 
-            'pembimbing_lapangan_id' => PembimbingLapangan::all()->random()->id,
+            'pembimbing_lapangan_id' => PembimbingLapangan::inRandomOrder()->first()->id,
 
-            'pembimbing_sekolah_id' => PembimbingSekolah::all()->random()->id,
+            'pembimbing_sekolah_id' => PembimbingSekolah::inRandomOrder()->first()->id,
 
             'alamat' => fake()->address(),
             

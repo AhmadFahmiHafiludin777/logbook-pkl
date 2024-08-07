@@ -11,7 +11,7 @@ class Jadwal extends Model
     
     protected $fillable = ['nama', 'tanggal', 'angkatan_jurusan_sekolah_id'];
 
-    public function angkatan_jurusan_sekolah(){
+    public function angkatanJurusanSekolah(){
         return $this->belongsTo(AngkatanJurusanSekolah::class);
     }
 
