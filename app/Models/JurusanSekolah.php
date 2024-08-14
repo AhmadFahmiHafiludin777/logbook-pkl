@@ -18,4 +18,11 @@ class JurusanSekolah extends Model
     public function jurusan(){
         return $this->belongsTo(Jurusan::class);
     }
+
+    public function angkatanJurusanSekolah()
+    {
+        return $this->hasMany(AngkatanJurusanSekolah::class);
+    }
+
+    
 }

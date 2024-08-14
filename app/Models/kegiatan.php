@@ -19,4 +19,9 @@ class Kegiatan extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function scopeSudah($query){
+        return $query->where('status', 'sudah');
+    }
+
+    
 }

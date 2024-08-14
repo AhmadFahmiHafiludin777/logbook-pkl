@@ -10,4 +10,9 @@ class Angkatan extends Model
     use HasFactory;
     
     protected $fillable = ['tahun'];
+
+    public function angkatanJurusanSekolah() {
+        return $this->hasMany(AngkatanJurusanSekolah::class);
+    }
+
 }
