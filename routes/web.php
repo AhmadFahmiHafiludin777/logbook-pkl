@@ -99,9 +99,9 @@ Route::get('/projects', function () {
     return view('jurusan', ['title' => 'Jurusan Page', 'jurusans' => Jurusan::all()]);
 });
 
-Route::get('/soal', function () {
+Route::get('/soaluser', function () {
     dump("1. data 1 user pertama");
-    $no1 = User::find(1)->toArray();
+    $no1 = User::first()->toArray();  
     dump($no1);
 
     dump("2. data seluruh user");
@@ -113,18 +113,19 @@ Route::get('/soal', function () {
     dump($no3);
 
     dump("4. data 10 user pertama dengan id > 5");
-    $no4 = User::where('id', '>', 5)->take(5)->get()->toArray();
+    $no4 = User::where('id', '>', 5)->limit(10)->get()->toArray();
     dump($no4);
 
     dump("5. data 10 user pertama dengan id > 5, diurutkan berdasarkan abjad nama/emailnya (A ke Z)");
-    $no5 = User::where('id', '>', 5)->take(5)->orderBy('name', 'asc')->get()->toArray();
+    $no5 = User::where('id', '>', 5)->limit(10)->orderBy('name', 'asc')->get()->toArray();
     dump($no5);
 
     dump("6. data 10 user pertama dengan id > 5, diurutkan berdasarkan tgl created_at (baru ke lama)");
-    dump();
+    $no6 = User::where('id', '>', 5)->orderBy('created_at', 'desc')->limit(10)->get()->toArray();
+    dump($no6);
 
     dump("7. data user pertama dengan id > 5");
-    $no7 = User::where('id', '>', 5)->take(1)->get()->toArray();
+    $no7 = User::where('id', '>', 5)->limit(1)->get()->toArray();
     dump($no7);
 
     dump("8. data user dengan id 5");
@@ -136,13 +137,56 @@ Route::get('/soal', function () {
     dump($no9);
 
     dump("10. data user dengan kolom nama/email berawalan dengan huruf A");
-    dump();
+    $no10 = User::where('name', 'like', 'A%')->get()->toArray();
+    dump($no10);
 
     dump("11. data user dengan kolom nama/email berawalan dengan huruf A DAN memiliki id > 5");
-    dump();
+    $no11 = User::where('name', 'like', 'A%')->where('id', '>', 5)->get()->toArray();
+    dump($no11);
 
     dump("12. data user dengan kolom nama/email berawalan dengan huruf A ATAU mengandung kata admin");
-    dump();
+    $no12 = User::where('name', 'like', 'A%')->orWhere('name', 'like', '%admin%')->get()->toArray();
+    dump($no12);
 });
+
+Route::get('/soalsiswa', function () {
+    dump("1. data 1 siswa pertama");
+    dump(Siswa::first()->toArray());
+
+    dump("2. data seluruh siswa");
+    dump(Siswa::all()->toArray());
+
+    dump("3. seluruh data siswa dengan id > 5 (nomor id 6, 7, 8, dst)");
+    dump(Siswa::where('id', '>', 5)->get()->toArray());
+
+    dump("4. data 10 siswa pertama dengan id > 5");
+    dump(Siswa::where('id', '>', 5)->limit(10)->get()->toArray());
+
+    dump("5. data 10 siswa pertama dengan id > 5, diurutkan berdasarkan abjad nama/emailnya (A ke Z)");
+    dump(Siswa::where('id', '>', 5)->limit(10)->orderBy('nama', 'asc')->get()->toArray());
+
+    dump("6. data 10 siswa pertama dengan id > 5, diurutkan berdasarkan tgl created_at (baru ke lama)");
+    dump(Siswa::where('id', '>', 5)->limit(10)->orderBy('created_at', 'desc')->get()->toArray());
+
+    dump("7. data siswa pertama dengan id > 5");
+    dump(Siswa::where('id', '>', 5)->first()->toArray());
+
+    dump("8. data siswa dengan id 5");
+    dump(Siswa::find(5)->toArray());
+
+    dump("9. data siswa dengan id 5, namun hanya di select nama dan email nya");
+    dump(Siswa::where('id', 5)->select('nama', 'email')->get()->toArray());
+
+    dump("10. data siswa dengan kolom nama/email berawalan dengan huruf A");
+    dump(Siswa::where('nama', 'like', 'A%')->get()->toArray());
+
+    dump("11. data siswa dengan kolom nama/email berawalan dengan huruf A DAN memiliki id > 5");
+    dump(Siswa::where('id', '>', 5)->where('nama', 'like', 'A%')->where('id', '>', 5)->get()->toArray());
+
+    dump("12. data siswa dengan kolom nama/email berawalan dengan huruf A ATAU mengandung kata siswa");
+    dump(Siswa::where('nama', 'like', 'A%')->orWhere('nama', 'like', '%siswa%')->get()->toArray());
+
+});
+
 
 

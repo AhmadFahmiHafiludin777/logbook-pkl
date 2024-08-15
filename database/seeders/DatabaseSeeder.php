@@ -32,15 +32,20 @@ class DatabaseSeeder extends Seeder
         AngkatanJurusanSekolah::factory(20)->create();
         PembimbingLapangan::factory(30)->create();
         PembimbingSekolah::factory(40)->create();
-        Siswa::factory(80)->create();
+        Siswa::factory(100)->create();
         Jadwal::factory(50)->create();
         Kegiatan::factory(50)->create();
 
 
-        // User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
+        User::factory()->create([
+            'name' => 'Test Admin',
+            'email' => 'test@example.com',
+        ]);
+
+        Siswa::factory()->create([
+            'nama' => 'Test Siswa',
+            'email' => 'test@kkkj.com',
+        ]);
         // jurusan ::create([
         //     'kode' => 'RPL',
         //     'nama' => 'Rekayasa Perangkat Lunak'
