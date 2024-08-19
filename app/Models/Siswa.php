@@ -11,7 +11,7 @@ class Siswa extends Model
     
     protected $fillable = ['nama', 'angkatan_jurusan_sekolah_id', 'pembimbing_lapangan_id', 'pembimbing_sekolah_id', 'alamat', 'no_telp','email'];
    
-    protected $with = ['pembimbingLapangan'];
+    // protected $with = ['pembimbingLapangan'];
     public function angkatanJurusanSekolah()
     {
         return $this->belongsTo(AngkatanJurusanSekolah::class);
@@ -26,9 +26,9 @@ class Siswa extends Model
         return $this->belongsTo(PembimbingSekolah::class);
     }
 
-    public function getFullNameAttribute(){
-        return $this->first_name . '' . $this->last_name;
-    }
+    // public function getFullNameAttribute(){
+    //     return $this->first_name . '' . $this->last_name;
+    // }
 
     
 

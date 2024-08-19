@@ -18,4 +18,21 @@ class AngkatanJurusanSekolah extends Model
     public function angkatan(){
         return $this->belongsTo(Angkatan::class);
     }
+
+    public function siswa(){
+        return $this->hasMany(Siswa::class);
+    }
+
+    public function jadwal(){
+        return $this->hasMany(Jadwal::class);
+    }
+
+    public function pembimbingSekolah(){
+        return $this->hasMany(PembimbingSekolah::class);
+    }
+
+    public function pembimbingLapangan(){
+        return $this->hasMany(PembimbingLapangan::class);
+    }
+
 }

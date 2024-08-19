@@ -15,6 +15,10 @@ class PembimbingSekolah extends Model
         return $this->belongsTo(AngkatanJurusanSekolah::class);
     }
 
+    public function siswa(){
+        return $this->hasMany(Siswa::class);
+    }
+
     // public function scopeAngkaSatu($query){
     //     return $query->where('angkatan_jurusan_sekolah_id', 1);
     // }

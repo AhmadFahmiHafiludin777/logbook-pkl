@@ -11,4 +11,8 @@ class Jurusan extends Model
     
     protected $fillable = ['kode', 'nama'];
 
+    public function jurusanSekolah(){
+        return $this->hasMany(JurusanSekolah::class);
+    }
+
 }

@@ -34,7 +34,7 @@ class DatabaseSeeder extends Seeder
         PembimbingSekolah::factory(40)->create();
         Siswa::factory(100)->create();
         Jadwal::factory(50)->create();
-        Kegiatan::factory(50)->create();
+        Kegiatan::factory(100)->create();
 
 
         User::factory()->create([

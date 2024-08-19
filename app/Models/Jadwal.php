@@ -15,4 +15,8 @@ class Jadwal extends Model
         return $this->belongsTo(AngkatanJurusanSekolah::class);
     }
 
+    public function kegiatan(){
+        return $this->hasMany(Kegiatan::class);
+    }
+
 }

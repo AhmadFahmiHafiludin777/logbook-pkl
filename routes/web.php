@@ -1,7 +1,9 @@
 <?php
 
 use App\Models\Angkatan;
+use App\Models\Jadwal;
 use App\Models\Jurusan;
+use App\Models\Kegiatan;
 use App\Models\PembimbingLapangan;
 use App\Models\School;
 use App\Models\Sekolah;
@@ -186,6 +188,43 @@ Route::get('/soalsiswa', function () {
     dump("12. data siswa dengan kolom nama/email berawalan dengan huruf A ATAU mengandung kata siswa");
     dump(Siswa::where('nama', 'like', 'A%')->orWhere('nama', 'like', '%siswa%')->get()->toArray());
 
+});
+
+Route::get('/tugassoal', function() {
+        
+    dump("1. Tampilkan daftar Siswa yang terdaftar di SMK 9 Sorong");
+    dump(Siswa::whereRelation('angkatanJurusanSekolah.jurusanSekolah.sekolah', 'nama', 'SMK 9 Sorong')->get()->toArray());
+
+    dump("2. Tampilkan semua Siswa yang memiliki Jurusan PHP ");
+    dump(Siswa::whereRelation('angkatanJurusanSekolah.jurusanSekolah.jurusan', 'kode', 'PHP')->get()->toArray());
+
+    dump("3. Bagaimana cara mendapatkan nama Sekolah dari Siswa yang bernama Ayu Rahimah");
+    dump(Sekolah::whereRelation('jurusanSekolah.angkatanJurusanSekolah.siswa', 'nama', 'Ayu Rahimah')->get()->toArray());
+
+    dump("4. Kegiatan apa saja yang dilakukan ketika jadwalnya adalah Cindy Pratiwi  ");
+    dump(Kegiatan::whereRelation('jadwal', 'nama', 'Cindy Pratiwi')->select('deskripsi')->get()->toArray());
+
+    dump("5. Pada tanggal berapa dilakukannya kegiatan Omnis vel sunt ratione dolores quia voluptatum vero. Dolores aliquid sed error maiores. Vel quo aut officia enim. Vero laboriosam nam laboriosam voluptatem. ");
+    dump(Jadwal::whereRelation('kegiatan', 'deskripsi', 'Omnis vel sunt ratione dolores quia voluptatum vero. Dolores aliquid sed error maiores. Vel quo aut officia enim. Vero laboriosam nam laboriosam voluptatem.')->select('tanggal')->get()->toArray());
+
+    dump("6. Angkatan berapa saja yang memiliki jurusan UAH");
+    dump(Angkatan::whereRelation('angkatanJurusanSekolah.jurusanSekolah.jurusan', 'kode', 'UAH')->select('tahun')->get()->toArray());
+
+    dump("7. Setiap pembimbing sekolah memiliki banyak siswa. Tampilkan daftar siswa yang dibimbing oleh Rachel Wijayanti ");
+    dump(Siswa::whereHas('pembimbingSekolah', function($query){
+        $query->where('nama', 'Rachel Wijayanti');
+    })->get()->toArray());
+
+    dump("8. Pembimbing Lapangan yang bernama Samsul Daliman Sitorus membimbing di jurusan apa");
+    dump(Jurusan::whereRelation('jurusanSekolah.angkatanJurusanSekolah.pembimbingLapangan', 'nama', 'Samsul Daliman Sitorus')->select('kode', 'nama')->get()->toArray());
+
+    dump("9. Tampilkan pembimbing lapangan yang membimbing lebih dari 3 siswa");
+    dump(PembimbingLapangan::has('siswa', '>', 3)->get()->toArray());
+
+    dump("10. Tampilkan user yang memiliki kegiatan yang statusnya sudah dan lebih dari 2");
+    dump(User::whereHas('kegiatan', function($query){
+        $query->where('status', 'sudah');
+    }, '>', 2)->get()->toArray());
 });
 
 
