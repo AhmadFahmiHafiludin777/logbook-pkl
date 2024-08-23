@@ -11,7 +11,7 @@
               <x-nav-link href="/" :active="request()->is('/')">Home</x-nav-link>
               <x-nav-link href="/schools" :active="request()->is('schools')">Team</x-nav-link>
               <x-nav-link href="/projects" :active="request()->is('projects')">Projects</x-nav-link>
-              <a href="/welcome" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Calendar</a>
+              <x-nav-link href="/about" :active="request()->is('about')">About</x-nav-link>
               <a href="#" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Reports</a>
             </div>
           </div>
@@ -89,7 +89,9 @@
         <x-nav-link href="/" :active="request()->is('/')">Home</x-nav-link>
         <x-nav-link href="/schools" :active="request()->is('schools')">Team</x-nav-link>
         <x-nav-link href="/projects" :active="request()->is('projects')">Projects</x-nav-link>
-        <a href="/welcome" class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Calendar</a>
+        <x-nav-link href="/about" :active="request()->is('about')">About</x-nav-link>
+
+        <a href="/about" class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white">About</a>
         <a href="#" class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Reports</a>
       </div>
       <div class="border-t border-gray-700 pb-3 pt-4">

@@ -101,6 +101,10 @@ Route::get('/projects', function () {
     return view('jurusan', ['title' => 'Jurusan Page', 'jurusans' => Jurusan::all()]);
 });
 
+Route::get('/about',function(){
+    return view('about', ['title' => 'About Page']);
+});
+
 Route::get('/soaluser', function () {
     dump("1. data 1 user pertama");
     $no1 = User::first()->toArray();  
