@@ -20,6 +20,8 @@ class PembimbingSekolahFactory extends Factory
         return [
             'nama' => fake()->name(20),
 
+            'gender' => fake()->randomElement(['L', 'P']),
+
             'angkatan_jurusan_sekolah_id' => AngkatanJurusanSekolah::inRandomOrder()->first()->id,
             
             'no_telp' => fake()->phoneNumber()

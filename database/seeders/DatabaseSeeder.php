@@ -46,6 +46,13 @@ class DatabaseSeeder extends Seeder
             'nama' => 'Test Siswa',
             'email' => 'test@kkkj.com',
         ]);
+
+        PembimbingSekolah::factory()->create([
+            'nama' => 'ahmad fahmi hafiludin',
+        ]);
+        PembimbingSekolah::factory()->create([
+            'nama' => 'farrel_raditya_marset',
+        ],);
         // jurusan ::create([
         //     'kode' => 'RPL',
         //     'nama' => 'Rekayasa Perangkat Lunak'

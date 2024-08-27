@@ -5,6 +5,7 @@ use App\Models\Jadwal;
 use App\Models\Jurusan;
 use App\Models\Kegiatan;
 use App\Models\PembimbingLapangan;
+use App\Models\PembimbingSekolah;
 use App\Models\School;
 use App\Models\Sekolah;
 use App\Models\Siswa;
@@ -229,6 +230,8 @@ Route::get('/tugassoal', function() {
     dump(User::whereHas('kegiatan', function($query){
         $query->where('status', 'sudah');
     }, '>', 2)->get()->toArray());
+
+
 });
 
 
