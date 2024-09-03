@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AngkatanController;
 use App\Models\Angkatan;
 use App\Models\Jadwal;
 use App\Models\Jurusan;
@@ -87,7 +88,7 @@ Route::get('/', function () {
     return view('home', ['title' => 'Siswa Page', 'siswas' => Siswa::all()]);
 });
 Route::get('/welcome', function () {
-    return view('welcome');
+    return view('welcome', ['title' => 'Dashboard Page']);
 });
 Route::get('/schools', function () {
     return view('schools', ['title' => 'Team Page', 'sekolahs'=> Sekolah::all()]);
@@ -104,7 +105,15 @@ Route::get('/projects', function () {
 
 Route::get('/about',function(){
     return view('about', ['title' => 'About Page']);
+
 });
+
+
+// CRUD Angkatan
+Route::get('/angkatan', [AngkatanController::class, 'tampil'])->name('angkatan.tampil');
+Route::get('/angkatan/tambah', [AngkatanController::class, 'tambah'])->name('angkatan.tambah');
+Route::post('/angkatan/submit', [AngkatanController::class, 'submit'])->name('angkatan.submit');
+
 
 Route::get('/soaluser', function () {
     dump("1. data 1 user pertama");
