@@ -25,7 +25,7 @@
    <x-header>{{ $title }}</x-header>
     <main>
       <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
-        <div class="w-10 h-10 bg-sky-200 rounded-full flex fixed bottom-5 right-5 -translate-x-1/2 cursor-pointer"><a href="#" class="text-xl m-auto">🔝</a></div>
+        <div class="w-10 h-10 bg-sky-200 rounded-full flex fixed bottom-5 right-5 -translate-x-1/2 cursor-pointer hover:animate-pulse"><a href="#" class="text-xl m-auto">🔝</a></div>
         {{ $slot }}
       </div>
     </main>

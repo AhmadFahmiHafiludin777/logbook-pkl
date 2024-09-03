@@ -109,10 +109,14 @@ Route::get('/about',function(){
 });
 
 
+
 // CRUD Angkatan
 Route::get('/angkatan', [AngkatanController::class, 'tampil'])->name('angkatan.tampil');
 Route::get('/angkatan/tambah', [AngkatanController::class, 'tambah'])->name('angkatan.tambah');
 Route::post('/angkatan/submit', [AngkatanController::class, 'submit'])->name('angkatan.submit');
+Route::get('angkatan/edit{id}', [AngkatanController::class, 'edit']) ->name('angkatan.edit');
+Route::post('angkatan/update{id}', [AngkatanController::class, 'update']) ->name('angkatan.update');
+Route::post('angkatan/delete{id}', [AngkatanController::class, 'delete']) ->name('angkatan.delete');
 
 
 Route::get('/soaluser', function () {
