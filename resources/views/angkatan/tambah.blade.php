@@ -1,20 +1,21 @@
 <x-layout>
     <x-slot:title>{{ $title }}</x-slot:title>
 
+    <div class="w-3/4 border border-slate-200 rounded-xl mx-auto mt-4 shadow-lg  p-5">
+        <form action="{{ route('angkatan.submit') }}" method="POST">
+            @csrf
+            <label for="email">
+                <span class="text-base block font-bold mb-1 text-blue-400">Tahun</span>
+                <input type="text" id="name" name="tahun" placeholder="masukkan tahun..."  class="h-12 px-3 py-2 border shadow rounded w-full block text-sm placeholder:text-slate-400 focus:outline-none focus:ring-1 focus:ring-sky-500 focus:border-sky-500">
+            </label>
 
-
-    <form action="{{ route('angkatan.submit') }}" method="POST">
-        @csrf
-        <div class="w-full lg:w-2/3 lg:mx-auto">
-            <div class="w-full px-4 pb-8">
-                <label for="name" class="text-base text-blue-400 font-bold">Tahun</label>
-                <input type="text"  id="name" name="tahun" class="w-full bg-slate-200 text-black p-3 rounded-md focus:outline-none focus:ring-blue-500 focus:ring-1 focus:border-blue-500">
-            </div>
-            <div class="w-full px-4">
+            <div class="w-full px-4 mt-5">
                 <button onclick="alert('Anda Yakin Data Akan Ditambahkan ?')" class="text-base font-semibold text-white bg-blue-400 py-3 px-8 rounded-full w-full hover:opacity-80 hover:shadow-lg transition duration-500">Tambah</button>
             </div>
-        </div>
+        </form>
+
         
-    </form>
+
+    </div>
     
 </x-layout>

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AngkatanController;
+use App\Http\Controllers\SekolahController;
 use App\Models\Angkatan;
 use App\Models\Jadwal;
 use App\Models\Jurusan;
@@ -117,6 +118,17 @@ Route::post('/angkatan/submit', [AngkatanController::class, 'submit'])->name('an
 Route::get('angkatan/edit{id}', [AngkatanController::class, 'edit']) ->name('angkatan.edit');
 Route::post('angkatan/update{id}', [AngkatanController::class, 'update']) ->name('angkatan.update');
 Route::post('angkatan/delete{id}', [AngkatanController::class, 'delete']) ->name('angkatan.delete');
+
+// CRUD Sekolah
+Route::get('/sekolah', [SekolahController::class, 'tampil'])->name('sekolah.tampil');
+Route::get('/sekolah/tambah', [SekolahController::class, 'tambah'])->name('sekolah.tambah');
+Route::post('/sekolah/submit', [SekolahController::class, 'submit'])->name('sekolah.submit');
+Route::get('sekolah/edit{id}', [SekolahController::class, 'edit']) ->name('sekolah.edit');
+Route::post('sekolah/update{id}', [SekolahController::class, 'update']) ->name('sekolah.update');
+Route::post('sekolah/delete{id}', [SekolahController::class, 'delete']) ->name('sekolah.delete');
+
+
+
 
 
 Route::get('/soaluser', function () {

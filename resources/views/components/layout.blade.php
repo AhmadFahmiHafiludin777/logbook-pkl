@@ -19,7 +19,7 @@
   <body class="h-full">
   ```
 -->
-<div class="min-h-full">
+<div class="min-h-full ">
     <x-navbar></x-navbar>
   
    <x-header>{{ $title }}</x-header>
