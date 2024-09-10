@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use App\Models\Angkatan;
@@ -7,40 +6,48 @@ use Illuminate\Http\Request;
 
 class AngkatanController extends Controller
 {
-    function tampil() {
-        $angkatan = Angkatan::get();
-        return view('angkatan.tampil', compact('angkatan'), ['title' => 'Angkatan Page']);
+    public function index() {
+        $angkatan = Angkatan::simplePaginate(5);
+        return view('angkatan.index', compact('angkatan'), ['title' => 'Angkatan Page']);
     }
 
-    function tambah() {
-        return view('angkatan.tambah', ['title' => 'Tambah Page']);
+    public function create() {
+        return view('angkatan.create', ['title' => 'Tambah Page']);
     }
 
-    function submit(Request $request){
-        $angkatan = new Angkatan();
-        $angkatan->tahun = $request->tahun;
-        $angkatan->save();
+    public function store(Request $request){
 
-        return redirect()->route('angkatan.tampil');
+        Angkatan::create($request->validate([
+            'tahun' => ['required', 'integer', 'min:1900', 'max:2100'],
+        ]));
+
+        return redirect()->route('angkatan.index');
     }
 
-    function edit($id) {
-        $angkatan = Angkatan::find($id);
+    public function show($id) {
+        $angkatan = Angkatan::findOrFail($id);
+        return view('angkatan.show', compact('angkatan'), ['title' => 'Show Page']);
+    }
+
+    public function edit($id) {
+        $angkatan = Angkatan::findOrFail($id);
         return view('angkatan.edit', compact('angkatan'), ['title' => 'Edit Page']);
     }
 
-    function update(Request $request, $id){
-        $angkatan = Angkatan::find($id);
-        $angkatan->tahun = $request->tahun;
-        $angkatan->update();
+    public function update(Request $request, $id){
 
-        return redirect()->route('angkatan.tampil');
+        Angkatan::findOrFail($id)->update(
+            $request->validate([
+                'tahun' => ['required', 'integer', 'min:1900', 'max:2100'],
+            ]));
+        
+        return redirect()->route('angkatan.index');
     }
 
-    function delete($id) {
-        $angkatan = Angkatan::find($id);
+    public function delete($id) {
+        $angkatan = Angkatan::findOrFail($id);
         $angkatan->delete();
 
-        return redirect()->route('angkatan.tampil');
+        return redirect()->route('angkatan.index');
     }
 }

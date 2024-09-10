@@ -2,51 +2,61 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Angkatan;
 use App\Models\Sekolah;
 use Illuminate\Http\Request;
 
 class SekolahController extends Controller
 {
-    function tampil() {
-        $sekolah = Sekolah::get();
-        return view('sekolah.tampil', compact('sekolah'), ['title' => 'Sekolah Page']);
+    public function index() {
+        $sekolah = Sekolah::paginate(3);
+        return view('sekolah.index', compact('sekolah'), ['title' => 'Sekolah Page']);
     }
 
-    function tambah() {
-        return view('sekolah.tambah', ['title' => 'Tambah Page']);
+    public function create() {
+        return view('sekolah.create', ['title' => 'Tambah Page']);
     }
 
-    function submit(Request $request){
-        $sekolah = new Sekolah();
-        $sekolah->nama = $request->nama;
-        $sekolah->email = $request->email;
-        $sekolah->no_telp = $request->no_telp;
-        $sekolah->alamat = $request->alamat;
-        $sekolah->save();
+    public function store(Request $request){
 
-        return redirect()->route('sekolah.tampil');
+        Sekolah::create($request->validate([
+            'nama' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'email', 'max:255'],
+            'no_telp' => ['nullable', 'string' , 'max:20'],
+            'alamat' => ['nullable', 'string', 'max:255'],
+        ]));
+
+        return redirect()->route('sekolah.index');
     }
 
-    function edit($id) {
-        $sekolah = Sekolah::find($id);
+    public function show($id) {
+        $sekolah = Sekolah::findOrFail($id);
+        return view('sekolah.show', compact('sekolah'), ['title' => 'Show Page']);
+    }
+
+    public function edit($id) {
+        $sekolah = Sekolah::findOrFail($id);
         return view('sekolah.edit', compact('sekolah'), ['title' => 'Edit Page']);
     }
 
-    function update(Request $request, $id){
-        $sekolah = Sekolah::find($id);
-        $sekolah->nama = $request->nama;
-        $sekolah->email = $request->email;
-        $sekolah->no_telp = $request->no_telp;
-        $sekolah->alamat = $request->alamat;
-        $sekolah->update();
+    public function update(Request $request, $id){
 
-        return redirect()->route('sekolah.tampil');
+        Sekolah::findOrFail($id)->update(
+            $request->validate([
+                'nama' => ['required', 'string', 'max:255'],
+                'email' => ['required', 'email', 'max:255'],
+                'no_telp' => ['nullable', 'string' , 'max:20'],
+                'alamat' => ['nullable', 'string', 'max:255'],
+            ])
+            );
+
+        return redirect()->route('sekolah.index');
     }
 
-    function delete($id) {
-        $sekolah = Sekolah::find($id);
+    public function destroy($id) {
+        $sekolah = Sekolah::findOrFail($id);
         $sekolah->delete();
 
-        return redirect()->route('sekolah.tampil');
+        return redirect()->route('sekolah.index');
     }
 }
