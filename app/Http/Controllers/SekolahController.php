@@ -6,6 +6,7 @@ use App\Http\Requests\StoreSekolahRequest;
 use App\Http\Requests\UpdateSekolahRequest;
 use App\Models\Angkatan;
 use App\Models\Sekolah;
+use App\Models\Siswa;
 use Illuminate\Http\Request;
 
 class SekolahController extends Controller
@@ -13,6 +14,12 @@ class SekolahController extends Controller
     public function index() {
         $sekolah = Sekolah::paginate(5);
         return view('sekolah.index', compact('sekolah'), ['title' => 'Sekolah Page']);
+    }
+
+    // client side
+    function clientSide() {
+        $sekolah = Sekolah::get();
+        return view('sekolah.client_side', compact('sekolah'), ['title' => 'Client Side']);
     }
 
     public function create() {

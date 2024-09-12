@@ -123,6 +123,10 @@ Route::resource('angkatan', AngkatanController::class);
 
 Route::resource('sekolah', SekolahController::class);
 
+// client side
+Route::get('/client_side', [SekolahController::class, 'clientSide'])->name(name: 'sekolah.client_side');
+
+
 
 
 
