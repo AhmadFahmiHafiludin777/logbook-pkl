@@ -12,15 +12,10 @@ use Illuminate\Http\Request;
 class SekolahController extends Controller
 {
     public function index() {
-        $sekolah = Sekolah::paginate(5);
+        $sekolah = Sekolah::all();
         return view('sekolah.index', compact('sekolah'), ['title' => 'Sekolah Page']);
     }
 
-    // client side
-    function clientSide() {
-        $sekolah = Sekolah::get();
-        return view('sekolah.client_side', compact('sekolah'), ['title' => 'Client Side']);
-    }
 
     public function create() {
         return view('sekolah.create', ['title' => 'Tambah Page']);
