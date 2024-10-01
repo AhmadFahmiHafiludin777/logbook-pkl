@@ -9,7 +9,7 @@
     </div>
     
     <div class="overflow-x-auto mt-4">
-        <table id="table" class="min-w-full leading-normal text-left divide-y divide-gray-200">
+        <table id="table" class="min-w-full bg-white border border-gray-200">
             <thead>
                 <tr class="w-full bg-blue-500 border-b">
                     <th class="py-3 px-6 text-left font-medium text-white uppercase">ID</th>
@@ -20,16 +20,22 @@
             </thead>
             <tbody>
                 @foreach($sekolah as $data)
-                <tr class="border-b hover:bg-gray-50 transition duration-300">
-                    <td class="py-3 px-6 text-left text-gray-700 font-semibold">{{ $data->id }}</td>
-                    <td class="py-3 px-6 text-left text-gray-700">{{ $data->nama }}</td>
-                    <td class="py-3 px-6 text-gray-700 flex">
-                        <a href="{{ route('sekolah.show', $data->id) }}" class="rounded-md bg-sky-500 text-white px-2 py-1 hover:border hover:border-sky-600 transition duration-300" >Lihat</a>
-                        <a href="{{ route('sekolah.edit', $data->id) }}" class="rounded-md bg-yellow-500 text-white px-2 py-1 ml-2 hover:border hover:border-yellow-600 transition duration-300">Edit</a>
-                        <form action="{{ route('sekolah.destroy', $data->id) }}" method="POST" onsubmit="return confirm('Apakah Anda Yakin Ingin Menghapus Data Ini ?');">
+                <tr>
+                    <td>{{ $data->id }}</td>
+                    <td>{{ $data->nama }}</td>
+                    <td>
+                        <a href="{{ route('sekolah.show', $data->id) }}" class="rounded-md bg-sky-500 text-lg text-white px-2 py-1 hover:border hover:border-sky-600 transition duration-300 ml-4">Lihat</a>
+                        <a href="{{ route('sekolah.edit', $data->id) }}" class="rounded-md bg-yellow-500 text-lg text-white px-2 py-1 ml-2 hover:border hover:border-yellow-600 transition duration-300">Edit</a>
+                        <form action="{{ route('sekolah.destroy', $data->id) }}" method="POST" style="display: inline" onsubmit="return confirm('Apakah Anda Yakin Ingin Menghapus Data Ini ?');">
                             @method('DELETE')
                             @csrf
-                            <button type="submit" class="bg-red-600 rounded-md text-white px-2 py-1 ml-2 hover:border hover:border-red-800 transition duration-300">Hapus</button>
+                            @if ($data->jurusanSekolah()->exists())
+                                <button type="button" class="bg-red-300 rounded-md text-white px-2 py-1 ml-2 text-lg cursor-not-allowed relative group" disabled>
+                                    Delete
+                                </button>
+                            @else
+                                <button type="submit" class="bg-red-600 rounded-md text-white px-2 py-1 ml-2 text-lg hover:border hover:border-red-800 transition duration-300">Delete</button>
+                            @endif
                         </form>
                     </td>
 

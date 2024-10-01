@@ -13,37 +13,96 @@ class AngkatanController extends Controller
 {
     public function index() {
 
-        $angkatan = Angkatan::all();
-
-        return view('angkatan.index', compact('angkatan'), ['title' => 'Angkatan Page']);
+        return view('angkatan.index', ['title' => 'Angkatan Page']);
     }
+
+    // public function getData(Request $request) {
+    //     if (!$request->ajax()) {
+
+    //         return response()->json(['error' => 'Unauthorized'], 401);
+
+    //     }
+
+    //     $angkatan = Angkatan::query();
+
+    //     return DataTables::of($angkatan)
+    //         ->addIndexColumn() 
+    //         ->addColumn('action', function($row) {
+                
+    //             return '
+    //             <div class="py-3 px-6 text-gray-700 flex"> 
+    //             <a href="'.route('angkatan.show', $row->id).'" class="rounded-md bg-sky-500 text-lg text-white px-2 py-1 hover:border hover:border-sky-600 transition duration-300 ml-4"">Lihat</a>
+    //                     <a href="'.route('angkatan.edit', $row->id).'" class="rounded-md bg-yellow-500 text-lg text-white px-2 py-1 ml-2 hover:border hover:border-yellow-600 transition duration-300"">Edit</a>
+    //                     <form action="'.route('angkatan.destroy', $row->id).'" method="POST" style="display:inline;">
+    //                         '.csrf_field().'
+    //                         '.method_field('DELETE').'
+    //                         <button type="submit" class="bg-red-600 rounded-md text-white px-2 py-1 ml-2 text-lg hover:border hover:border-red-800 transition duration-300" onclick="return confirm(\'Are you sure?\')">Delete</button>
+    //                     </form>
+    //             </div>';
+                   
+    //         })
+    //         ->rawColumns(['action'])
+    //         ->make(true);
+
+    // }
+
+    // public function getData(Request $request) {
+    //     if (!$request->ajax()) {
+    //         return response()->json(['error' => 'Unauthorized'], 401);
+    //     }
+    
+    //     $angkatan = Angkatan::query();
+    
+    //     return DataTables::of($angkatan)
+    //         ->addIndexColumn()
+    //         ->addColumn('action', function($row) {
+    //             $hasRelation = $row->angkatanJurusanSekolah()->exists();
+    //             if ($hasRelation) {
+    //                 return '
+    //                     <div class="py-3 px-6 text-gray-700 flex"> 
+    //                         <a href="'.route('angkatan.show', $row->id).'" class="rounded-md bg-sky-500 text-lg text-white px-2 py-1 hover:border hover:border-sky-600 transition duration-300 ml-4">Lihat</a>
+    //                         <a href="'.route('angkatan.edit', $row->id).'" class="rounded-md bg-yellow-500 text-lg text-white px-2 py-1 ml-2 hover:border hover:border-yellow-600 transition duration-300">Edit</a>
+    //                         <button type="button" class="bg-red-300 rounded-md text-white px-2 py-1 ml-2 text-lg cursor-not-allowed relative group">
+    //                             Delete
+    //                         </button>
+    //                     </div>';
+    //             }
+    
+    //             return '
+    //             <div class="py-3 px-6 text-gray-700 flex"> 
+    //                 <a href="'.route('angkatan.show', $row->id).'" class="rounded-md bg-sky-500 text-lg text-white px-2 py-1 hover:border hover:border-sky-600 transition duration-300 ml-4">Lihat</a>
+    //                 <a href="'.route('angkatan.edit', $row->id).'" class="rounded-md bg-yellow-500 text-lg text-white px-2 py-1 ml-2 hover:border hover:border-yellow-600 transition duration-300">Edit</a>
+    //                 <form action="'.route('angkatan.destroy', $row->id).'" method="POST" style="display:inline;">
+    //                     '.csrf_field().'
+    //                     '.method_field('DELETE').'
+    //                     <button type="submit" class="bg-red-600 rounded-md text-white px-2 py-1 ml-2 text-lg hover:border hover:border-red-800 transition duration-300" onclick="return confirm(\'Are you sure?\')">Delete</button>
+    //                 </form>
+    //             </div>';
+    //         })
+    //         ->rawColumns(['action'])
+    //         ->make(true);
+    // }
+    
+
+    
 
     public function getData(Request $request) {
-        if ($request->ajax()) {
-            $angkatan = Angkatan::query();
-
-            return DataTables::of($angkatan)
-                ->addIndexColumn() 
-                ->addColumn('action', function($row) {
-                
-                    return '
-                    <div class="py-3 px-6 text-gray-700 flex"> 
-                    <a href="'.route('angkatan.show', $row->id).'" class="rounded-md bg-sky-500 text-lg text-white px-2 py-1 hover:border hover:border-sky-600 transition duration-300 ml-4"">Lihat</a>
-                            <a href="'.route('angkatan.edit', $row->id).'" class="rounded-md bg-yellow-500 text-lg text-white px-2 py-1 ml-2 hover:border hover:border-yellow-600 transition duration-300"">Edit</a>
-                            <form action="'.route('angkatan.destroy', $row->id).'" method="POST" style="display:inline;">
-                                '.csrf_field().'
-                                '.method_field('DELETE').'
-                                <button type="submit" class="bg-red-600 rounded-md text-white px-2 py-1 ml-2 text-lg hover:border hover:border-red-800 transition duration-300" onclick="return confirm(\'Are you sure?\')">Delete</button>
-                            </form>
-                     </div>';
-                   
-                })
-                ->rawColumns(['action'])
-                ->make(true);
+        if(!$request->ajax()) {
+            return response()->json(['error' => 'Unauthorized'], 401);
         }
 
-        return response()->json(['error' => 'Unauthorized'], 401);
+        $angkatan = Angkatan::query();
+        return DataTables::of($angkatan)
+            ->addIndexColumn()
+            ->addColumn('action', function($row) {
+                $hasRelation = $row->angkatanJurusanSekolah()->exists();
+                return view('angkatan.partials.action', compact('row', 'hasRelation'))->render();
+            })
+            ->rawColumns(['action'])
+            ->make(true);
     }
+    
+    
 
     public function create() {
         return view('angkatan.create', ['title' => 'Tambah Page']);
@@ -74,8 +133,13 @@ class AngkatanController extends Controller
     }
 
     public function destroy(Angkatan $angkatan) {
+
+        // if ($angkatan->angkatanJurusanSekolah()->count() > 0) {
+        //     return redirect()->route('angkatan.index')->with('error', 'Tidak dapat menghapus data angkatan karena memiliki data terkait.');
+        // }
         $angkatan->delete();
 
         return redirect()->route('angkatan.index');
     }
+
 }

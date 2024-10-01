@@ -10,9 +10,19 @@
     {{-- <link rel="stylesheet" href="https://cdn.datatables.net/2.1.7/css/dataTables.tailwindcss.css">
 
     <link href="https://cdn.datatables.net/v/bs5/dt-2.1.6/datatables.min.css" rel="stylesheet"> --}}
+{{-- Tailwind 1 start --}}
+    {{-- <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css"> --}} --}}
+    {{-- <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"> --}}
+    {{-- Tailwind 1 End --}}
 
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    {{-- Tailwind 2 start --}}
+
+    {{-- <link rel="stylesheet" href="https://code.jquery.com/jquery-3.7.1.js">
+    <link rel="stylesheet" href="https://cdn.tailwindcss.com/">
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.1.7/js/dataTables.js">
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.1.7/js/dataTables.tailwindcss.js">
+    <link rel="stylesheet" href="https://cdn.tailwindcss.com/"> --}}
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.1.7/css/dataTables.tailwindcss.css">
 
 
     <title>home</title>
@@ -39,11 +49,20 @@
     
   </div>
 
- 
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+ {{-- Tailwind 1 start --}}
+  {{-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script> --}}
+  {{-- Tailwind 1 end --}}
 
   {{-- <script src="https://cdn.datatables.net/v/bs5/dt-2.1.6/datatables.min.js"></script> --}}
+
+  {{-- Tailwind 2 start --}}
+  <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+  <script src="https://cdn.tailwindcss.com/"></script>
+  <script src="https://cdn.datatables.net/2.1.7/js/dataTables.js"></script>
+  <script src="https://cdn.datatables.net/2.1.7/js/dataTables.tailwindcss.js"></script>
+  <script src="https://cdn.tailwindcss.com/"></script>
+  {{-- Taiwind 2 end --}}
   <script>
         $(document).ready(function () {
             $('#table').DataTable(); 

@@ -18,16 +18,23 @@ use Illuminate\Support\Facades\Route;
 use Yajra\DataTables\Facades\DataTables;
 
 Route::get('/', function () {
+    return view('welcome');
+})->middleware('guest');
 
-    // $siswa = Siswa::with('pembimbingLapangan')->get();
-    return view('home', ['title' => 'Siswa Page', 'siswas' => Siswa::all()]);
+Route::get('/home', function () {
+        // $siswa = Siswa::with('pembimbingLapangan')->get();
+
+    return view('home', ['title' => 'Home Page', 'siswas' => Siswa::all()]);
+})->middleware('auth', 'verified');
+
+Route::get('/dashboard', function () {
+    return view('dashboard', ['title' => 'Dashboard Page']);
 });
-Route::get('/welcome', function () {
-    return view('welcome', ['title' => 'Dashboard Page']);
-});
+
 Route::get('/schools', function () {
     return view('schools', ['title' => 'Team Page', 'sekolahs'=> Sekolah::all()]);
-});
+})->middleware('auth');
+
 Route::get('/schools/{school:nama}', function(Sekolah $school){
     
         return view('school',[ 'title' => 'Single school', 'school' => $school ]);
