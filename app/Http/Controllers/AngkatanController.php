@@ -134,9 +134,6 @@ class AngkatanController extends Controller
 
     public function destroy(Angkatan $angkatan) {
 
-        // if ($angkatan->angkatanJurusanSekolah()->count() > 0) {
-        //     return redirect()->route('angkatan.index')->with('error', 'Tidak dapat menghapus data angkatan karena memiliki data terkait.');
-        // }
         $angkatan->delete();
 
         return redirect()->route('angkatan.index');

@@ -5,6 +5,7 @@
           <div class="flex-shrink-0">
             {{-- <img class="h-8 w-8" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500" alt="Your Company"> --}}
             <img class="w-10 h-15" src="{{ asset('img/logoapp.png') }}" alt="Logo">
+            
           </div>
           <div class="hidden md:block">
             <div class="ml-10 flex items-baseline space-x-4">
@@ -28,14 +29,18 @@
             </button>
 
             <!-- Profile dropdown -->
-            <div class="relative ml-3 animate-bounce">
+            <div class="relative flex ml-3 animate-bounce items-center">
               <div>
                 <button type="button" @click="isOpen = !isOpen" class="relative flex max-w-xs items-center rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800" id="user-menu-button" aria-expanded="false" aria-haspopup="true">
                   <span class="absolute -inset-1.5"></span>
                   <span class="sr-only">Open user menu</span>
-                  <img class="h-8 w-8 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
+                  {{-- <img class="h-8 w-8 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt=""> --}}
+                  <img class="h-8 w-8 rounded-full" src="{{ asset('img/foto.png') }}" alt="">
                 </button>
               </div>
+              <div class=" text-white ml-2">{{ auth()->user()->name }}</div>
+
+
 
               <!--
                 Dropdown menu, show/hide based on menu state.
@@ -44,7 +49,7 @@
                   From: "transform opacity-0 scale-95"
                   To: "transform opacity-100 scale-100"
                 Leaving: "transition ease-in duration-75"
-                  From: "transform opacity-100 scale-100"
+                  From: "transform opacity-100 scale-100"http://logbook-pkl.test/angkatan
                   To: "transform opacity-0 scale-95"
               -->
               <div  x-show="isOpen"
@@ -54,9 +59,9 @@
               x-transition:leave="transition ease-in duration-75 transform"
               x-transition:leave-start="opacity-100 scale-100"
               x-transition:leave-end="opacity-0 scale-95"
-              class="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1">
+              class="absolute right-0 z-10 mt-48 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1">
                 <!-- Active: "bg-gray-100", Not Active: "" -->
-                <a href="#" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-0">Your Profile</a>
+                <a href="/profile" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-0">Your Profile</a>
                 <a href="#" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-1">Settings</a>
                 <form method="POST" action="{{ route('logout') }}">
                   @csrf
@@ -99,11 +104,11 @@
       <div class="border-t border-gray-700 pb-3 pt-4">
         <div class="flex items-center px-5">
           <div class="flex-shrink-0 animate-bounce">
-            <img class="h-10 w-10 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
+            <img class="h-8 w-8 rounded-full" src="{{ asset('img/foto.png') }}" alt="">
           </div>
           <div class="ml-3">
-            <div class="text-base font-medium leading-none text-white">Tom Cook</div>
-            <div class="text-sm font-medium leading-none text-gray-400">tom@example.com</div>
+            <div class="text-base font-medium leading-none text-white">{{ auth()->user()->name }}</div>
+            <div class="text-sm font-medium leading-none text-gray-400">{{ auth()->user()->email }}</div>
           </div>
           <button type="button" class="relative ml-auto flex-shrink-0 rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
             <span class="absolute -inset-1.5"></span>
@@ -114,7 +119,7 @@
           </button>
         </div>
         <div class="mt-3 space-y-1 px-2">
-          <a href="#" class="block rounded-md px-3 py-2 text-base font-medium text-gray-400  hover:text-white">Your Profile</a>
+          <a href="/profile" class="block rounded-md px-3 py-2 text-base font-medium text-gray-400  hover:text-white">Your Profile</a>
           <a href="#" class="block rounded-md px-3 py-2 text-base font-medium text-gray-400  hover:text-white">Settings</a>
           <form method="POST" action="{{ route('logout') }}">
             @csrf
