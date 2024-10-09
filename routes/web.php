@@ -24,11 +24,8 @@ Route::get('/', function () {
 
 Route::middleware(['auth', 'verified'])->group(function() {
 
-    Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');
-    Route::post('/profile/update', [ProfileController::class, 'updateProfile'])->name('profile.update');
-    Route::post('/profile/password', [ProfileController::class, 'updatePassword'])->name('profile.updatePassword');
-
-
+    Route::singleton('profile', ProfileController::class);
+    Route::put('profile/password', [ProfileController::class, 'updatePassword'])->name('profile.update.password');
 
     Route::get('/home', function () {
         // $siswa = Siswa::with('pembimbingLapangan')->get();

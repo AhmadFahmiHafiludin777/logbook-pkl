@@ -6,6 +6,7 @@
     
             <form method="POST" action="{{ route('profile.update') }}" class="space-y-6">
                 @csrf
+                @method('PUT')
                 <div>
                     <label for="name" class="block text-sm font-medium text-gray-700">Name</label>
                     <input id="name" name="name" type="text" value="{{ old('name', auth()->user()->name) }}" required
@@ -38,8 +39,9 @@
             </form>
 
             <h2 class="text-xl font-semibold mb-4 mt-5">Update Password</h2>
-            <form method="POST" action="{{ route('profile.updatePassword') }}" class="mt-6 space-y-6">
+            <form method="POST" action="{{ route('profile.update.password') }}" class="mt-6 space-y-6">
                 @csrf
+                @method('PUT')
                 <div>
                     <label for="current_password" class="block text-sm font-medium text-gray-700">Current Password</label>
                     <div class="relative mt-1">
