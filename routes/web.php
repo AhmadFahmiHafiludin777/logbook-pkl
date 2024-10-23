@@ -33,10 +33,6 @@ Route::middleware(['auth', 'verified'])->group(function() {
     return view('home', ['title' => 'Home Page', 'siswas' => Siswa::all()]);
     });
 
-    Route::get('/dashboard', function () {
-        return view('dashboard', ['title' => 'Dashboard Page']);
-    });
-
     Route::get('/schools', function () {
         return view('schools', ['title' => 'Team Page', 'sekolahs'=> Sekolah::all()]);
     });
@@ -57,12 +53,21 @@ Route::middleware(['auth', 'verified'])->group(function() {
     });
 
     // server-side
-    Route::resource('angkatan', AngkatanController::class);
-    Route::get('/data', [AngkatanController::class, 'getData'])->name('data');
+    Route::group(['middleware' => ['permission:view-angkatan|create-angkatan|edit-angkatan|delete-angkatan']], function() {
+        Route::resource('angkatan', AngkatanController::class);
+        Route::get('/data', [AngkatanController::class, 'getData'])->name('data');
 
-    // client-side
-    Route::resource('sekolah', SekolahController::class);
+        Route::get('/crud', function () {
+            return view('crud', ['title' => 'Dashboard Page']);
+        });
 
+        // client-side
+        Route::resource('sekolah', SekolahController::class);
+
+
+    });
+    
+    
 });
 
 
