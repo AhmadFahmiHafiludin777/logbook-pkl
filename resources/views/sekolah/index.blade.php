@@ -25,6 +25,7 @@
                     <td>{{ $data->nama }}</td>
                     <td>
                         <a href="{{ route('sekolah.show', $data->id) }}" class="rounded-md bg-sky-500 text-lg text-white px-2 py-1 hover:border hover:border-sky-600 transition duration-300 ml-4">Lihat</a>
+                        @if ((auth()->user()->hasAnyRole('Admin Super', 'Admin PKL')))
                         <a href="{{ route('sekolah.edit', $data->id) }}" class="rounded-md bg-yellow-500 text-lg text-white px-2 py-1 ml-2 hover:border hover:border-yellow-600 transition duration-300">Edit</a>
                         <form action="{{ route('sekolah.destroy', $data->id) }}" method="POST" style="display: inline" onsubmit="return confirm('Apakah Anda Yakin Ingin Menghapus Data Ini ?');">
                             @method('DELETE')
@@ -37,6 +38,7 @@
                                 <button type="submit" class="bg-red-600 rounded-md text-white px-2 py-1 ml-2 text-lg hover:border hover:border-red-800 transition duration-300">Delete</button>
                             @endif
                         </form>
+                        @endif
                     </td>
 
                 </tr>

@@ -29,9 +29,7 @@
                 <a href="{{ route('sekolah.index') }}" class="bg-blue-600 text-white px-5 py-3 rounded-lg shadow hover:bg-blue-700 transition duration-150 ease-in-out">
                     Kembali ke Daftar Sekolah
                 </a>
-                <a href="{{ route('sekolah.edit', $sekolah->id) }}" class="bg-yellow-500 text-white px-5 py-3 rounded-lg shadow hover:bg-yellow-600 transition duration-150 ease-in-out">
-                    Edit Sekolah
-                </a>
+                
             </div>
         </div>
     </div>

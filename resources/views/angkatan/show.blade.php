@@ -22,9 +22,7 @@
                 <a href="{{ route('angkatan.index') }}" class="bg-blue-600 text-white px-5 py-3 rounded-lg shadow hover:bg-blue-700 transition duration-150 ease-in-out">
                     Kembali ke Daftar Angkatan
                 </a>
-                <a href="{{ route('angkatan.edit', $angkatan->id) }}" class="bg-yellow-500 text-white px-5 py-3 rounded-lg shadow hover:bg-yellow-600 transition duration-150 ease-in-out">
-                    Edit Angkatan
-                </a>
+                
             </div>
         </div>
     </div>

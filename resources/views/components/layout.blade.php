@@ -25,7 +25,7 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/2.1.7/css/dataTables.tailwindcss.css">
 
 
-    <title>home</title>
+    <title>{{ $title }}</title>
 </head>
 <body class="h-full">
     <!--

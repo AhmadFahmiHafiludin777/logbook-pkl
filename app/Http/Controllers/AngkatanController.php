@@ -7,6 +7,7 @@ use App\Http\Requests\UpdateSekolahRequest;
 use App\Models\Angkatan;
 use App\Models\Sekolah;
 use Illuminate\Http\Request;
+use Spatie\Permission\Exceptions\UnauthorizedException;
 use Yajra\DataTables\DataTables;
 
 class AngkatanController extends Controller
@@ -105,6 +106,9 @@ class AngkatanController extends Controller
     
 
     public function create() {
+        if (!auth()->user()->hasPermissionTo('create-angkatan')) {
+            throw UnauthorizedException::forPermissions([]);
+        }
         return view('angkatan.create', ['title' => 'Tambah Page']);
     }
 
@@ -121,6 +125,10 @@ class AngkatanController extends Controller
     }
 
     public function edit(Angkatan $angkatan) {
+
+        if (!auth()->user()->hasPermissionTo('edit-angkatan')) {
+            throw UnauthorizedException::forPermissions([]);
+        }
 
         return view('angkatan.edit', compact('angkatan',), ['title' => 'Edit Page']);
     }

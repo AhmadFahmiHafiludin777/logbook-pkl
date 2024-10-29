@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AngkatanController;
+use App\Http\Controllers\JurusanController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SekolahController;
 use App\Models\Angkatan;
@@ -53,12 +54,12 @@ Route::middleware(['auth', 'verified'])->group(function() {
     });
 
     // server-side
-    Route::group(['middleware' => ['permission:view-angkatan|create-angkatan|edit-angkatan|delete-angkatan']], function() {
+    Route::group(['middleware' => ['permission:view-angkatan|create-angkatan|edit-angkatan|delete-angkatan|view-sekolah|create-sekolah|edit-sekolah|delete-sekolah']], function() {
         Route::resource('angkatan', AngkatanController::class);
-        Route::get('/data', [AngkatanController::class, 'getData'])->name('data');
+        Route::get('/dataAngkatan', [AngkatanController::class, 'getData'])->name('data.angkatan');
 
         Route::get('/crud', function () {
-            return view('crud', ['title' => 'Dashboard Page']);
+            return view('crud', ['title' => 'CRUD Page']);
         });
 
         // client-side
@@ -66,6 +67,10 @@ Route::middleware(['auth', 'verified'])->group(function() {
 
 
     });
+
+    Route::resource('jurusan', JurusanController::class);
+    Route::get('/dataJurusan', [JurusanController::class, 'getData'])->name('data.jurusan');
+
     
     
 });

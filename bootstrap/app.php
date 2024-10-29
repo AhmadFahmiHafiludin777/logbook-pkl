@@ -18,7 +18,7 @@ return Application::configure(basePath: dirname(__DIR__))
             'role_or_permission' => \Spatie\Permission\Middleware\RoleOrPermissionMiddleware::class,
         ]);    })
         ->withExceptions(function (Exceptions $exceptions) {
-            $exceptions->render(function (UnauthorizedException $e, $request) {
+            $exceptions->render(function ( UnauthorizedException $e, $request) {
                 return response()->view('errors.index', [
                     'exception' => $e->getMessage()
                 ], 403);
