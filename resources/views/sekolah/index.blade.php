@@ -3,9 +3,12 @@
 
     <div class="flex items-center justify-between">
         <h4 class="text-3xl">List Sekolah</h4>
+
+        @can('create-sekolah')
         <div class="">
             <a href="{{ route('sekolah.create') }}" class="rounded-sm bg-blue-500 text-white px-4 py-2 hover:border hover:border-sky-300 transition duration-300">+ Tambah Sekolah</a>
         </div>
+        @endcan
     </div>
     
     <div class="overflow-x-auto mt-4">
@@ -24,9 +27,13 @@
                     <td>{{ $data->id }}</td>
                     <td>{{ $data->nama }}</td>
                     <td>
+                        @can('view-sekolah')
                         <a href="{{ route('sekolah.show', $data->id) }}" class="rounded-md bg-sky-500 text-lg text-white px-2 py-1 hover:border hover:border-sky-600 transition duration-300 ml-4">Lihat</a>
-                        @if ((auth()->user()->hasAnyRole('Admin Super', 'Admin PKL')))
+                        @endcan
+                        @can('edit-sekolah')
                         <a href="{{ route('sekolah.edit', $data->id) }}" class="rounded-md bg-yellow-500 text-lg text-white px-2 py-1 ml-2 hover:border hover:border-yellow-600 transition duration-300">Edit</a>
+                        @endcan
+                        @can('delete-sekolah')
                         <form action="{{ route('sekolah.destroy', $data->id) }}" method="POST" style="display: inline" onsubmit="return confirm('Apakah Anda Yakin Ingin Menghapus Data Ini ?');">
                             @method('DELETE')
                             @csrf
@@ -38,7 +45,7 @@
                                 <button type="submit" class="bg-red-600 rounded-md text-white px-2 py-1 ml-2 text-lg hover:border hover:border-red-800 transition duration-300">Delete</button>
                             @endif
                         </form>
-                        @endif
+                        @endcan
                     </td>
 
                 </tr>

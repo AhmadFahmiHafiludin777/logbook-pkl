@@ -14,6 +14,8 @@ class AngkatanController extends Controller
 {
     public function index() {
 
+        abort_if(!auth()->user()->can('view-angkatan'), 403);
+
         return view('angkatan.index', ['title' => 'Angkatan Page']);
     }
 
@@ -88,6 +90,9 @@ class AngkatanController extends Controller
     
 
     public function getData(Request $request) {
+
+        abort_if(!auth()->user()->can('view-angkatan'), 403);
+
         if(!$request->ajax()) {
             return response()->json(['error' => 'Unauthorized'], 401);
         }
@@ -105,12 +110,20 @@ class AngkatanController extends Controller
     
     
 
+    // public function create() {
+    //     if (!auth()->user()->hasPermissionTo('create-angkatan')) {
+    //         throw UnauthorizedException::forPermissions([]);
+    //     }
+    //     return view('angkatan.create', ['title' => 'Tambah Page']);
+    // }
+
     public function create() {
-        if (!auth()->user()->hasPermissionTo('create-angkatan')) {
-            throw UnauthorizedException::forPermissions([]);
-        }
+        abort_if(!auth()->user()->can('create-angkatan'), 403);
+
         return view('angkatan.create', ['title' => 'Tambah Page']);
     }
+
+    
 
     public function store(StoreAngkatanRequest $request){
 
@@ -121,14 +134,15 @@ class AngkatanController extends Controller
 
     public function show(Angkatan $angkatan) {
 
+        abort_if(!auth()->user()->can('view-angkatan'), 403);
+
+
         return view('angkatan.show', compact('angkatan'), ['title' => 'Show Page']);
     }
 
     public function edit(Angkatan $angkatan) {
 
-        if (!auth()->user()->hasPermissionTo('edit-angkatan')) {
-            throw UnauthorizedException::forPermissions([]);
-        }
+        abort_if(!auth()->user()->can('edit-angkatan'), 403);
 
         return view('angkatan.edit', compact('angkatan',), ['title' => 'Edit Page']);
     }
@@ -141,6 +155,8 @@ class AngkatanController extends Controller
     }
 
     public function destroy(Angkatan $angkatan) {
+
+        abort_if(!auth()->user()->can('delete-angkatan'), 403);
 
         $angkatan->delete();
 

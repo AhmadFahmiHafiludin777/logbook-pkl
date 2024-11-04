@@ -53,20 +53,17 @@ Route::middleware(['auth', 'verified'])->group(function() {
 
     });
 
-    // server-side
-    Route::group(['middleware' => ['permission:view-angkatan|create-angkatan|edit-angkatan|delete-angkatan|view-sekolah|create-sekolah|edit-sekolah|delete-sekolah']], function() {
-        Route::resource('angkatan', AngkatanController::class);
-        Route::get('/dataAngkatan', [AngkatanController::class, 'getData'])->name('data.angkatan');
 
-        Route::get('/crud', function () {
-            return view('crud', ['title' => 'CRUD Page']);
-        });
+    Route::resource('angkatan', AngkatanController::class);
+    Route::get('/dataAngkatan', [AngkatanController::class, 'getData'])->name('data.angkatan');
+
+    Route::get('/crud', function () {
+        return view('crud', ['title' => 'CRUD Page']);
+    })->middleware('permission:view-angkatan|view-sekolah');
 
         // client-side
-        Route::resource('sekolah', SekolahController::class);
+    Route::resource('sekolah', SekolahController::class);
 
-
-    });
 
     Route::resource('jurusan', JurusanController::class);
     Route::get('/dataJurusan', [JurusanController::class, 'getData'])->name('data.jurusan');

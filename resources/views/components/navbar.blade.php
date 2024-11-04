@@ -14,7 +14,7 @@
             <x-nav-link href="/schools" :active="request()->is('schools')">Team</x-nav-link>
             <x-nav-link href="/projects" :active="request()->is('projects')">Projects</x-nav-link>
             <x-nav-link href="/about" :active="request()->is('about')">About</x-nav-link>
-            @if ((auth()->user()->hasAnyRole('Admin Super', 'Admin PKL', 'Pembimbing PKL', 'Pembimbing Sekolah')))
+            @if(auth()->user()->can(['view-angkatan', 'view-sekolah']))
             <x-nav-link href="/crud" :active="request()->is('crud')">CRUD</x-nav-link>
             @endif          </div>
         </div>
@@ -102,7 +102,7 @@
       <x-nav-link href="/schools" :active="request()->is('schools')">Team</x-nav-link>
       <x-nav-link href="/projects" :active="request()->is('projects')">Projects</x-nav-link>
       <x-nav-link href="/about" :active="request()->is('about')">About</x-nav-link>
-      @if ((auth()->user()->hasAnyRole('Admin Super', 'Admin PKL', 'Pembimbing PKL', 'Pembimbing Sekolah')))
+      @if(auth()->user()->can(['view-angkatan', 'view-sekolah']))
       <x-nav-link href="/crud" :active="request()->is('crud')">CRUD</x-nav-link>
       @endif
     </div>

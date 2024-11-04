@@ -4,9 +4,11 @@
     <div class="flex items-center justify-between">
         <h4 class="text-3xl">List Angkatan</h4>
         
+        @can('create-angkatan')
         <div class="">
             <a href="{{ route('angkatan.create') }}" class="rounded-sm bg-blue-500 text-white px-4 py-2 hover:border hover:border-sky-300 transition duration-300">+ Tambah Angkatan</a>
         </div>
+        @endcan
     </div>
    
     

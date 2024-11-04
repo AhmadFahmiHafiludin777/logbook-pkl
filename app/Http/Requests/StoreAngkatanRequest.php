@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use Illuminate\Auth\Middleware\Authorize;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StoreAngkatanRequest extends FormRequest
@@ -11,7 +12,7 @@ class StoreAngkatanRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return true;
+        return auth()->user()->can('create-angkatan');
     }
 
     /**

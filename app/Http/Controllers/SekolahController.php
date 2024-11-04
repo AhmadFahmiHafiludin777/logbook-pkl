@@ -17,12 +17,17 @@ class SekolahController extends Controller
     use AuthorizesRequests;
     
     public function index() {
+
+        if (!auth()->user()->can('view-sekolah')) {
+            throw UnauthorizedException::forPermissions([]);
+        }
+
         $sekolah = Sekolah::all();
         return view('sekolah.index', compact('sekolah'), ['title' => 'Sekolah Page']);
     }
 
     public function create() {
-        if (!auth()->user()->hasPermissionTo('create-sekolah')) {
+        if (!auth()->user()->can('create-sekolah')) {
             throw UnauthorizedException::forPermissions([]);
         }
 
@@ -38,12 +43,16 @@ class SekolahController extends Controller
 
     public function show(Sekolah $sekolah) {
 
+        if (!auth()->user()->can('view-sekolah')) {
+            throw UnauthorizedException::forPermissions([]);
+        }
+
         return view('sekolah.show', compact('sekolah'), ['title' => 'Show Page']);
     }
 
     public function edit(Sekolah $sekolah) {
 
-        if (!auth()->user()->hasPermissionTo('edit-sekolah')) {
+        if (!auth()->user()->can('edit-sekolah')) {
             throw UnauthorizedException::forPermissions([]);
         }
         
@@ -58,6 +67,10 @@ class SekolahController extends Controller
     }
 
     public function destroy(Sekolah $sekolah) {
+
+        if (!auth()->user()->can('delete-sekolah')) {
+            throw UnauthorizedException::forPermissions([]);
+        }
 
         $sekolah->delete();
 

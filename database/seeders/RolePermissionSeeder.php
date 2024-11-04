@@ -14,20 +14,21 @@ class RolePermissionSeeder extends Seeder
      */
     public function run(): void
     {
-        $permissions = [ 'view-angkatan', 'create-angkatan', 'edit-angkatan', 'delete-angkatan', 'view-sekolah', 'create-sekolah', 'edit-sekolah', 'delete-sekolah'];
+        $permissions = [ 
+            'view-angkatan', 'create-angkatan', 'edit-angkatan', 'delete-angkatan',
+            'view-sekolah', 'create-sekolah', 'edit-sekolah', 'delete-sekolah'
+        ];
 
         foreach($permissions as $permission) {
             Permission::firstOrCreate(['name' =>$permission]);
         }
 
 
-        $adminSuper = Role::firstOrCreate(['name' => 'Admin Super']);
-        $adminPKL = Role::firstOrCreate(['name' => 'Admin PKL']);
-        $pembimbingPKL = Role::firstOrCreate(['name' => 'Pembimbing PKL']);
-        $pembimbingSekolah = Role::firstOrCreate(['name' => 'Pembimbing Sekolah']);
-        $siswa = Role::firstOrCreate(['name' => 'Siswa']);
-
-        $adminSuper->givePermissionTo(Permission::all());
+        $adminSuper = Role::firstOrCreate(['name' => 'super-admin']);
+        $adminPKL = Role::firstOrCreate(['name' => 'admin-pkl']);
+        $pembimbingPKL = Role::firstOrCreate(['name' => 'pembimbing-pkl']);
+        $pembimbingSekolah = Role::firstOrCreate(['name' => 'pembimbing-sekolah']);
+        $siswa = Role::firstOrCreate(['name' => 'siswa']);
 
         $adminPKL->givePermissionTo(['view-angkatan', 'create-angkatan', 'edit-angkatan', 'delete-angkatan', 'view-sekolah', 'create-sekolah', 'edit-sekolah', 'delete-sekolah']);
 
