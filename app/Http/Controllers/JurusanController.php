@@ -16,10 +16,16 @@ class JurusanController extends Controller
      */
     public function index()
     {
+
+        abort_if(!auth()->user()->can('view-jurusan'), 403);
+
         return view('jurusan.index', ['title' => 'Jurusan Page']);
     }
 
     public function getData(Request $request) {
+
+        abort_if(!auth()->user()->can('view-jurusan'), 403);
+
         if(!$request->ajax()) {
             return response()->json(['error' => 'Unauthorized'], 401);
         }
@@ -40,6 +46,8 @@ class JurusanController extends Controller
      */
     public function create()
     {
+        abort_if(!auth()->user()->can('create-jurusan'), 403);
+
         return view('jurusan.create', ['title' => 'Tambah Jurusan']);
     }
 
@@ -50,7 +58,7 @@ class JurusanController extends Controller
     {
         Jurusan::create($request->validated());
 
-        return redirect()->route('jurusan.index');
+        return redirect()->route('jurusan.index')->with('success', 'Data jurusan berhasil dibuat');
     }
 
     /**
@@ -58,6 +66,8 @@ class JurusanController extends Controller
      */
     public function show(Jurusan $jurusan)
     {
+        abort_if(!auth()->user()->can('view-jurusan'), 403);
+
         return view('jurusan.show', compact('jurusan'), ['title' => 'Show Page']);
     }
 
@@ -66,6 +76,8 @@ class JurusanController extends Controller
      */
     public function edit(Jurusan $jurusan)
     {
+        abort_if(!auth()->user()->can('edit-jurusan'), 403);
+
         return view('jurusan.edit', compact('jurusan',), ['title' => 'Edit Page']);
 
     }
@@ -77,7 +89,7 @@ class JurusanController extends Controller
     {
         $jurusan->update($request->validated());
 
-        return redirect()->route('jurusan.index');
+        return redirect()->route('jurusan.index')->with('success', 'Data jurusan berhasil diupdate');
     }
 
     /**
@@ -85,8 +97,10 @@ class JurusanController extends Controller
      */
     public function destroy(Jurusan $jurusan)
     {
+        abort_if(!auth()->user()->can('delete-jurusan'), 403);
+
         $jurusan->delete();
 
-        return redirect()->route('jurusan.index');
+        return redirect()->route('jurusan.index')->with('success', 'Data jurusan berhasil dihapus');
     }
 }

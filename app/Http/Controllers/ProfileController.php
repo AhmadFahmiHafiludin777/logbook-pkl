@@ -31,7 +31,7 @@ public function show()
 
         $user->update($request->only('name', 'email'));
 
-        return back()->with('status_profile', 'Profile updated successfully!');
+        return back()->with('success', 'Profile updated successfully!');
     }
 
 
@@ -47,7 +47,7 @@ public function show()
             'password' => Hash::make($request->password),
         ]);
 
-        return back()->with('status_password', 'Password updated successfully!');
+        return back()->with('success', 'Password updated successfully!');
     }
 
 }

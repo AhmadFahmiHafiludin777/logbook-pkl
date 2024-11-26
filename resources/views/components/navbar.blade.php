@@ -66,6 +66,13 @@
               <!-- Active: "bg-gray-100", Not Active: "" -->
               <a href="/profile" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-0">Your Profile</a>
               <a href="#" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-1">Settings</a>
+              @impersonating($guard = null)
+                  <a href="{{ route('impersonate.leave') }}" class="block px-4 py-2 text-sm text-gray-700">
+                      Leave impersonation
+                  </a>
+              @endImpersonating
+
+
               <form method="POST" action="{{ route('logout') }}">
                 @csrf
                 <button type="submit" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-2">Log out</button>
@@ -126,6 +133,11 @@
       <div class="mt-3 space-y-1 px-2">
         <a href="/profile" class="block rounded-md px-3 py-2 text-base font-medium text-gray-400  hover:text-white">Your Profile</a>
         <a href="#" class="block rounded-md px-3 py-2 text-base font-medium text-gray-400  hover:text-white">Settings</a>
+        @impersonating($guard = null)
+          <a href="{{ route('impersonate.leave') }}" class="block rounded-md px-3 py-2 text-base font-medium text-gray-400  hover:text-white">
+            Leave impersonation
+          </a>
+        @endImpersonating
         <form method="POST" action="{{ route('logout') }}">
           @csrf
           <button type="submit" class="block rounded-md px-3 py-2 text-base font-medium text-gray-400  hover:text-white" role="menuitem" tabindex="-1" id="user-menu-item-2">Log out</button>

@@ -23,7 +23,7 @@ class StoreAngkatanRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'tahun' => ['required', 'integer', 'min:1900', 'max:2100'],
+            'tahun' => ['required', 'integer', 'min:1900', 'max:2100', 'unique:angkatans,tahun'],
         ];
     }
 }

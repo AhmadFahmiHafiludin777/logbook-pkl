@@ -3,15 +3,16 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rules\Password;
 
-class StoreSekolahRequest extends FormRequest
+class StoreUserRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
-        return auth()->user()->can('create-sekolah');
+        return true;
     }
 
     /**
@@ -22,10 +23,10 @@ class StoreSekolahRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'nama' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'email', 'max:255', 'unique:sekolahs,email'],
-            'no_telp' => ['nullable', 'string' , 'max:20'],
-            'alamat' => ['nullable', 'string', 'max:255'],
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'email', 'unique:users,email'],
+            'password' => ['required', 'string', 'confirmed', Password::defaults()],
+
         ];
     }
 }

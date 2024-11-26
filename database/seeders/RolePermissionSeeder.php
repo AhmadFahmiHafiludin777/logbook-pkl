@@ -16,7 +16,9 @@ class RolePermissionSeeder extends Seeder
     {
         $permissions = [ 
             'view-angkatan', 'create-angkatan', 'edit-angkatan', 'delete-angkatan',
-            'view-sekolah', 'create-sekolah', 'edit-sekolah', 'delete-sekolah'
+            'view-sekolah', 'create-sekolah', 'edit-sekolah', 'delete-sekolah',
+            'view-jurusan', 'create-jurusan', 'edit-jurusan', 'delete-jurusan',
+            'view-user', 'create-user', 'edit-user', 'delete-user', 'impersonate-user'
         ];
 
         foreach($permissions as $permission) {
@@ -30,8 +32,13 @@ class RolePermissionSeeder extends Seeder
         $pembimbingSekolah = Role::firstOrCreate(['name' => 'pembimbing-sekolah']);
         $siswa = Role::firstOrCreate(['name' => 'siswa']);
 
-        $adminPKL->givePermissionTo(['view-angkatan', 'create-angkatan', 'edit-angkatan', 'delete-angkatan', 'view-sekolah', 'create-sekolah', 'edit-sekolah', 'delete-sekolah']);
+        $adminPKL->givePermissionTo([
+            'view-angkatan', 'create-angkatan', 'edit-angkatan', 'delete-angkatan',
+            'view-sekolah', 'create-sekolah', 'edit-sekolah', 'delete-sekolah',
+            'view-jurusan', 'create-jurusan', 'edit-jurusan', 'delete-jurusan',
+            'view-user'
+        ]);
 
-        $pembimbingPKL->givePermissionTo(['view-angkatan', 'view-sekolah']);
+        $pembimbingPKL->givePermissionTo(['view-angkatan', 'view-sekolah', 'view-jurusan']);
     }
 }

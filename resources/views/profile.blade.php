@@ -30,11 +30,7 @@
                         class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-500 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition duration-150 ease-in-out">
                         Update Profile
                     </button>
-                    @if (session('status_profile'))
-                        <div class="text-green-600 ml-4">
-                            {{ session('status_profile') }}
-                        </div>
-                    @endif
+                    
                 </div>
             </form>
 
@@ -104,11 +100,7 @@
                         class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-500 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                         Update Password
                     </button>
-                    @if (session('status_password'))
-                        <div class="text-green-600 ml-4">
-                            {{ session('status_password') }}
-                        </div>
-                    @endif
+                    
                 </div>
             </form>
 

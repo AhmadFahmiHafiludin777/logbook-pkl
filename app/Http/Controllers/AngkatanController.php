@@ -129,7 +129,7 @@ class AngkatanController extends Controller
 
         Angkatan::create($request->validated());
 
-        return redirect()->route('angkatan.index');
+        return redirect()->route('angkatan.index')->with('success', 'Data angkatan berhasil dibuat');
     }
 
     public function show(Angkatan $angkatan) {
@@ -151,7 +151,7 @@ class AngkatanController extends Controller
 
         $angkatan->update($request->validated());
 
-        return redirect()->route('angkatan.index');
+        return redirect()->route('angkatan.index')->with('success', 'Data angkatan berhasil diupdate');
     }
 
     public function destroy(Angkatan $angkatan) {
@@ -160,7 +160,7 @@ class AngkatanController extends Controller
 
         $angkatan->delete();
 
-        return redirect()->route('angkatan.index');
+        return redirect()->route('angkatan.index')->with('success', 'Data angkatan berhasil dihapus');
     }
 
 }

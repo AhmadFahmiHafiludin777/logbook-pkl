@@ -41,6 +41,7 @@
     <x-navbar></x-navbar>
   
    <x-header>{{ $title }}</x-header>
+   <x-flash-message></x-flash-message>
     <main>
       <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
         <div class="w-10 h-10 bg-sky-200 rounded-full flex fixed bottom-5 right-5 -translate-x-1/2 cursor-pointer hover:animate-pulse"><a href="#" class="text-xl m-auto">🔝</a></div>
@@ -61,7 +62,8 @@
   <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
   <script src="https://cdn.tailwindcss.com/"></script>
   <script src="https://cdn.datatables.net/2.1.7/js/dataTables.js"></script>
-  <script src="https://cdn.datatables.net/2.1.7/js/dataTables.tailwindcss.js"></script>
+  <script src="{{ asset('js/app.js') }}"></script>
+  {{-- <script src="https://cdn.datatables.net/2.1.7/js/dataTables.tailwindcss.js"></script> --}}
   <script src="https://cdn.tailwindcss.com/"></script>
   {{-- Taiwind 2 end --}}
   <script>

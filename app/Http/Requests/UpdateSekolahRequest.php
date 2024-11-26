@@ -23,7 +23,7 @@ class UpdateSekolahRequest extends FormRequest
     {
         return [
             'nama' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'email', 'max:255'],
+            'email' => ['required', 'email', 'max:255', 'unique:sekolahs,email,' . $this->route('sekolah')->id],
             'no_telp' => ['nullable', 'string' , 'max:20'],
             'alamat' => ['nullable', 'string', 'max:255'],
         ];

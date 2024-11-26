@@ -4,6 +4,7 @@ use App\Http\Controllers\AngkatanController;
 use App\Http\Controllers\JurusanController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SekolahController;
+use App\Http\Controllers\UserController;
 use App\Models\Angkatan;
 use App\Models\Jadwal;
 use App\Models\Jurusan;
@@ -32,7 +33,7 @@ Route::middleware(['auth', 'verified'])->group(function() {
         // $siswa = Siswa::with('pembimbingLapangan')->get();
 
     return view('home', ['title' => 'Home Page', 'siswas' => Siswa::all()]);
-    });
+    })->name('home');
 
     Route::get('/schools', function () {
         return view('schools', ['title' => 'Team Page', 'sekolahs'=> Sekolah::all()]);
@@ -68,8 +69,18 @@ Route::middleware(['auth', 'verified'])->group(function() {
     Route::resource('jurusan', JurusanController::class);
     Route::get('/dataJurusan', [JurusanController::class, 'getData'])->name('data.jurusan');
 
+    Route::resource('user', UserController::class);
+    Route::get('/dataUser', [UserController::class, 'getData'])->name('data.user');
+    Route::put('user/{user}/password', [UserController::class, 'updatePassword'])->name('user.update.password');
+    Route::patch('user/{user}/restore', [UserController::class, 'restore'])->name('user.restore');
     
-    
+    // Impersonate
+    Route::get('/user/impersonate/{user}', [UserController::class, 'impersonate'])
+        ->name('user.impersonate');
+
+    Route::impersonate();
+
+
 });
 
 

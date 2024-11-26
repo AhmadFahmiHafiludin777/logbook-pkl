@@ -21,7 +21,7 @@ class SekolahFactory extends Factory
         $nomor = $this->faker->numberBetween(1, 10);
         $kota = $this->faker->city();
         $nama = "{$jenis} {$nomor} {$kota}";
-        $email = strtolower(str_replace(' ', '', $nama)) . '.sch.id';
+        $email = 'info@' . strtolower(str_replace(' ', '', $nama)) . '.sch.id';
 
         return [
             'nama' => "{$jenis} {$nomor} {$kota}",

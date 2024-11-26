@@ -38,7 +38,8 @@ class SekolahController extends Controller
 
         Sekolah::create($request->validated());
 
-        return redirect()->route('sekolah.index');
+        return redirect()->route('sekolah.index')->with('success', 'Data sekolah berhasil dibuat');
+
     }
 
     public function show(Sekolah $sekolah) {
@@ -63,7 +64,7 @@ class SekolahController extends Controller
 
         $sekolah->update($request->validated());
 
-        return redirect()->route('sekolah.index');
+        return redirect()->route('sekolah.index')->with('success', 'Data sekolah berhasil diupdate');
     }
 
     public function destroy(Sekolah $sekolah) {
@@ -74,6 +75,6 @@ class SekolahController extends Controller
 
         $sekolah->delete();
 
-        return redirect()->route('sekolah.index');
+        return redirect()->route('sekolah.index')->with('success', 'Data sekolah berhasil dihapus');
     }
 }

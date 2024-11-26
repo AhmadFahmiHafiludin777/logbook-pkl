@@ -11,7 +11,7 @@ class UpdateJurusanRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return true;
+        return auth()->user()->can('edit-jurusan');
     }
 
     /**
@@ -22,7 +22,7 @@ class UpdateJurusanRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'kode' => ['required', 'string', 'max:10', 'unique:jurusans,kode'],
+            'kode' => ['required', 'string', 'max:10', 'unique:jurusans,kode,' . $this->route('jurusan')->id],
             'nama' => ['required', 'string', 'max:255'],
         ];
     }
