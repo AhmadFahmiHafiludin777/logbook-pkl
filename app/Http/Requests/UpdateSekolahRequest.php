@@ -26,6 +26,7 @@ class UpdateSekolahRequest extends FormRequest
             'email' => ['required', 'email', 'max:255', 'unique:sekolahs,email,' . $this->route('sekolah')->id],
             'no_telp' => ['nullable', 'string' , 'max:20'],
             'alamat' => ['nullable', 'string', 'max:255'],
+            'jurusan' => ['array', 'exists:jurusans,id']
         ];
     }
 }

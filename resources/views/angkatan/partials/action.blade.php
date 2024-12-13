@@ -1,6 +1,6 @@
 <div class="py-3 px-6 text-gray-700 flex">
     @can('view-angkatan') 
-    <a href="{{ route('angkatan.show', $row->id) }}" class="rounded-md bg-sky-500 text-lg text-white px-3 py-2 hover:border hover:border-sky-600 transition duration-300 ml-4">Lihat</a>
+    <a href="{{ route('angkatan.show', $row->id) }}" class="rounded-md bg-sky-500 text-lg text-white px-4 py-2 hover:border hover:border-sky-600 transition duration-300 ml-4">Lihat</a>
     @endcan
     @can('edit-angkatan')
     <a href="{{ route('angkatan.edit', $row->id) }}" class="rounded-md bg-yellow-500 text-lg text-white px-4 py-2 ml-2 hover:border hover:border-yellow-600 transition duration-300">Edit</a>

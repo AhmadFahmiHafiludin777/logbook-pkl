@@ -11,8 +11,13 @@ class Jurusan extends Model
     
     protected $fillable = ['kode', 'nama'];
 
+    public function sekolah(){
+        return $this->belongsToMany(Sekolah::class, 'jurusan_sekolahs', 'jurusan_id', 'sekolah_id')->withTimestamps();
+    }
+
     public function jurusanSekolah(){
         return $this->hasMany(JurusanSekolah::class);
     }
+
 
 }

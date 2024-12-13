@@ -80,7 +80,6 @@ Route::middleware(['auth', 'verified'])->group(function() {
 
     Route::impersonate();
 
-
 });
 
 

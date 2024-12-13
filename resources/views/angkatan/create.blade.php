@@ -14,7 +14,7 @@
             @enderror
 
             <div class="w-full px-4 mt-5">
-                <button onclick="alert('Anda Yakin Data Akan Ditambahkan ?')" class="text-base font-semibold text-white bg-blue-400 py-3 px-8 rounded-full w-full hover:opacity-80 hover:shadow-lg transition duration-500">Tambah</button>
+                <button type="submit" onclick="return confirm('Anda Yakin Data Akan Ditambahkan ?')" class="text-base font-semibold text-white bg-blue-400 py-3 px-8 rounded-full w-full hover:opacity-80 hover:shadow-lg transition duration-500">Tambah</button>
             </div>
         </form>
 

@@ -17,6 +17,16 @@
                 <p class="text-gray-600">
                     <strong class="font-medium">Alamat:</strong> {{ $sekolah->alamat }}
                 </p>
+
+                <p class="text-gray-600">
+                    <strong class="font-medium">Jurusan:</strong>
+                    <ul class="list-disc ml-6">
+                        @foreach ($sekolah->jurusan as $item)
+                            <li>{{ $item->kode }}</li>
+                        @endforeach
+                    </ul>
+                </p>
+                
                 <p class="text-gray-600">
                     <strong class="font-medium">CREATED_AT:</strong> {{ $sekolah->created_at->format('d M Y, H:i') }}
                 </p>

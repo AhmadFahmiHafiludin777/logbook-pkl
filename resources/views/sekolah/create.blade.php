@@ -36,9 +36,22 @@
             <p class="text-red-500 text-sm mt-2 ml-1">{{ $message }}</p>
                 
             @enderror
+
+            <fieldset class="space-y-4">
+                <legend class="text-base font-bold text-blue-400">Jurusan</legend>
+                @foreach ($jurusan as $item)
+                    <div class="flex items-center space-x-3">
+                        <input type="checkbox" id="jurusan-{{ $item->id }}" name="jurusan[]" value="{{ $item->id }}" 
+                            class="w-5 h-5 rounded border-gray-300 focus:ring focus:ring-blue-300 focus:ring-opacity-50">
+                        <label for="jurusan-{{ $item->id }}" class="text-sm text-gray-600">{{ $item->kode }}</label>
+                    </div>
+                @endforeach
+            </fieldset>
+            
+            
     
             <div class="w-full px-4 mt-5">
-                <button onclick="alert('Anda Yakin Data Akan Ditambahkan ?')" class="text-base font-semibold text-white bg-blue-400 py-3 px-8 rounded-full w-full hover:opacity-80 hover:shadow-lg transition duration-500">Tambah</button>
+                <button type="submit" onclick="return confirm('Anda Yakin Data Akan Ditambahkan ?')" class="text-base font-semibold text-white bg-blue-400 py-3 px-8 rounded-full w-full hover:opacity-80 hover:shadow-lg transition duration-500">Tambah</button>
             </div>
         </form>
     </div>

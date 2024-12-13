@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreSekolahRequest;
 use App\Http\Requests\UpdateSekolahRequest;
 use App\Models\Angkatan;
+use App\Models\Jurusan;
 use App\Models\Sekolah;
 use App\Models\Siswa;
 use Illuminate\Auth\Access\AuthorizationException;
@@ -22,21 +23,24 @@ class SekolahController extends Controller
             throw UnauthorizedException::forPermissions([]);
         }
 
-        $sekolah = Sekolah::all();
+        $sekolah = Sekolah::with('jurusan')->get();
         return view('sekolah.index', compact('sekolah'), ['title' => 'Sekolah Page']);
     }
 
-    public function create() {
+    public function create( Sekolah $sekolah) {
         if (!auth()->user()->can('create-sekolah')) {
             throw UnauthorizedException::forPermissions([]);
         }
 
-        return view('sekolah.create', ['title' => 'Tambah Page']);
+        $jurusan = Jurusan::all();
+        return view('sekolah.create', compact('sekolah', 'jurusan'),['title' => 'Tambah Page']);
     }
 
     public function store(StoreSekolahRequest $request){
 
-        Sekolah::create($request->validated());
+        $sekolah = Sekolah::create($request->validated());
+
+        $sekolah->jurusan()->sync($request->jurusan ?? []);
 
         return redirect()->route('sekolah.index')->with('success', 'Data sekolah berhasil dibuat');
 
@@ -56,13 +60,18 @@ class SekolahController extends Controller
         if (!auth()->user()->can('edit-sekolah')) {
             throw UnauthorizedException::forPermissions([]);
         }
+
+        $jurusan = Jurusan::all();
+        $sekolah->load('jurusan');
         
-        return view('sekolah.edit', compact('sekolah'), ['title' => 'Edit Page']);
+        return view('sekolah.edit', compact('sekolah', 'jurusan'), ['title' => 'Edit Page']);
     }
 
     public function update(UpdateSekolahRequest $request, Sekolah $sekolah){
 
         $sekolah->update($request->validated());
+
+        $sekolah->jurusan()->sync($request->jurusan ?? []);
 
         return redirect()->route('sekolah.index')->with('success', 'Data sekolah berhasil diupdate');
     }

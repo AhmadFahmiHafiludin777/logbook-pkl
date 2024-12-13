@@ -11,6 +11,16 @@
                 <p class="text-gray-600">
                     <strong class="font-medium">Nama</strong> {{ $jurusan->nama }}
                 </p>
+
+                <p class="text-gray-600">
+                    <strong class="font-medium">Sekolah:</strong>
+                    <ul class="list-disc ml-6">
+                        @foreach ($jurusan->sekolah as $item)
+                            <li>{{ $item->nama }}</li>
+                        @endforeach
+                    </ul>
+                </p>
+
                 <p class="text-gray-600">
                     <strong class="font-medium">CREATED_AT:</strong> {{ $jurusan->created_at }}
                 </p>
