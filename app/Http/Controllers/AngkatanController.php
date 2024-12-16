@@ -136,6 +136,7 @@ class AngkatanController extends Controller
 
         abort_if(!auth()->user()->can('view-angkatan'), 403);
 
+        $angkatan->load('angkatanJurusanSekolah.jurusanSekolah.sekolah.jurusan');
 
         return view('angkatan.show', compact('angkatan'), ['title' => 'Show Page']);
     }

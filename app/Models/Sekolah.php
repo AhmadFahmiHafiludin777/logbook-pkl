@@ -21,6 +21,10 @@ class Sekolah extends Model
         return $this->hasMany(JurusanSekolah::class);
     }
 
+    public function angkatanJurusanSekolah() {
+        return $this->belongsToMany(Angkatan::class, 'angkatan_jurusan_sekolahs', 'jurusan_sekolah_id', 'angkatan_id')->withTimestamps();
+    }
+
 
     
 }

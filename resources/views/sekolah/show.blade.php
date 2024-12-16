@@ -26,6 +26,17 @@
                         @endforeach
                     </ul>
                 </p>
+
+
+                <p class="text-gray-600">
+                    <strong class="font-medium">Angkatan:</strong>
+                    <ul class="list-disc ml-6">
+                        @foreach ($angkatan as $angkatan)
+                            <li>{{ $angkatan->tahun }}</li>
+                        @endforeach
+                    </ul>
+                </p>
+                
                 
                 <p class="text-gray-600">
                     <strong class="font-medium">CREATED_AT:</strong> {{ $sekolah->created_at->format('d M Y, H:i') }}

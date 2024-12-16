@@ -47,6 +47,17 @@
                     </div>
                 @endforeach
             </fieldset>
+
+            <fieldset class="space-y-4">
+                <legend class="text-base font-bold text-blue-400">Angkatan</legend>
+                @foreach ($angkatan as $item)
+                    <div class="flex items-center space-x-3">
+                        <input type="checkbox" id="angkatan-{{ $item->id }}" name="angkatan[]" value="{{ $item->id }}" 
+                            class="w-5 h-5 rounded border-gray-300 focus:ring focus:ring-blue-300 focus:ring-opacity-50">
+                        <label for="angkatan-{{ $item->id }}" class="text-sm text-gray-600">{{ $item->tahun }}</label>
+                    </div>
+                @endforeach
+            </fieldset>
             
             
     

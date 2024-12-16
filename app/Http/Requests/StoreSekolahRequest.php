@@ -26,7 +26,8 @@ class StoreSekolahRequest extends FormRequest
             'email' => ['required', 'email', 'max:255', 'unique:sekolahs,email'],
             'no_telp' => ['nullable', 'string' , 'max:20'],
             'alamat' => ['nullable', 'string', 'max:255'],
-            'jurusan' => ['array', 'exists:jurusans,id']
+            'jurusan' => ['array', 'exists:jurusans,id'],
+            'angkatan' => ['array', 'exists:angkatans,id']
         ];
     }
 }

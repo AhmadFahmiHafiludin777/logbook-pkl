@@ -6,6 +6,7 @@ use App\Http\Requests\StoreSekolahRequest;
 use App\Http\Requests\UpdateSekolahRequest;
 use App\Models\Angkatan;
 use App\Models\Jurusan;
+use App\Models\JurusanSekolah;
 use App\Models\Sekolah;
 use App\Models\Siswa;
 use Illuminate\Auth\Access\AuthorizationException;
@@ -33,17 +34,46 @@ class SekolahController extends Controller
         }
 
         $jurusan = Jurusan::all();
-        return view('sekolah.create', compact('sekolah', 'jurusan'),['title' => 'Tambah Page']);
+        $angkatan = Angkatan::all();
+        return view('sekolah.create', compact('sekolah', 'jurusan', 'angkatan'),['title' => 'Tambah Page']);
     }
 
-    public function store(StoreSekolahRequest $request){
+    // public function store(StoreSekolahRequest $request){
 
+    //     $sekolah = Sekolah::create($request->validated());
+
+    //     $sekolah->jurusan()->sync($request->jurusan ?? []);
+
+    //     if($request->has('angkatan')) {
+    //         $sekolah->angkatanJurusanSekolah()->sync($request->angkatan);
+    //     }
+
+    //     return redirect()->route('sekolah.index')->with('success', 'Data sekolah berhasil dibuat');
+
+    // }
+
+    public function store(StoreSekolahRequest $request) {
         $sekolah = Sekolah::create($request->validated());
 
-        $sekolah->jurusan()->sync($request->jurusan ?? []);
+        $jurusanSekolah = [];
+        if ($request->has('jurusan')) {
+            foreach ($request->jurusan as $jurusanId) {
+                $jurusanSekolah[] = JurusanSekolah::create([
+                    'sekolah_id' => $sekolah->id,
+                    'jurusan_id' => $jurusanId,
+                ]);
+            }
+        }
+
+        if ($request->has('angkatan') && !empty($jurusanSekolah)) {
+            foreach ($jurusanSekolah as $js) {
+                foreach ($request->angkatan as $angkatanId) {
+                    $js->angkatan()->attach($angkatanId); 
+                }
+            }
+        }
 
         return redirect()->route('sekolah.index')->with('success', 'Data sekolah berhasil dibuat');
-
     }
 
     public function show(Sekolah $sekolah) {
@@ -52,26 +82,56 @@ class SekolahController extends Controller
             throw UnauthorizedException::forPermissions([]);
         }
 
-        return view('sekolah.show', compact('sekolah'), ['title' => 'Show Page']);
+        $sekolah->load('jurusan', 'jurusanSekolah.angkatan');
+
+        $angkatan = $sekolah->jurusanSekolah->flatMap(function($jurusanSekolah) {
+            return $jurusanSekolah->angkatan;
+        })->unique('id'); 
+
+        return view('sekolah.show', compact('sekolah', 'angkatan'), ['title' => 'Show Page']);
     }
 
-    public function edit(Sekolah $sekolah) {
 
+    public function edit(Sekolah $sekolah)
+    {
         if (!auth()->user()->can('edit-sekolah')) {
             throw UnauthorizedException::forPermissions([]);
         }
 
         $jurusan = Jurusan::all();
-        $sekolah->load('jurusan');
-        
-        return view('sekolah.edit', compact('sekolah', 'jurusan'), ['title' => 'Edit Page']);
+        $angkatan = Angkatan::all();
+
+        $sekolah->load('jurusanSekolah.angkatan');
+
+        return view('sekolah.edit', compact('sekolah', 'jurusan', 'angkatan'), [
+            'title' => 'Edit Sekolah',
+        ]);
     }
 
-    public function update(UpdateSekolahRequest $request, Sekolah $sekolah){
 
+    // public function update(UpdateSekolahRequest $request, Sekolah $sekolah){
+
+    //     $sekolah->update($request->validated());
+
+    //     $sekolah->jurusan()->sync($request->jurusan ?? []);
+
+    //     if($request->has('angkatan')) {
+    //         $sekolah->angkatanJurusanSekolah()->sync($request->angkatan);
+    //     }
+
+    //     return redirect()->route('sekolah.index')->with('success', 'Data sekolah berhasil diupdate');
+    // }
+
+    public function update(UpdateSekolahRequest $request, Sekolah $sekolah) {
         $sekolah->update($request->validated());
 
         $sekolah->jurusan()->sync($request->jurusan ?? []);
+
+        if ($request->has('angkatan')) {
+            foreach ($sekolah->jurusanSekolah as $js) {
+                $js->angkatan()->sync($request->angkatan);
+            }
+        }
 
         return redirect()->route('sekolah.index')->with('success', 'Data sekolah berhasil diupdate');
     }

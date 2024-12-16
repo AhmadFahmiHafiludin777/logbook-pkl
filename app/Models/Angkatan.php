@@ -15,4 +15,8 @@ class Angkatan extends Model
         return $this->hasMany(AngkatanJurusanSekolah::class);
     }
 
+    public function sekolah() {
+        return $this->belongsToMany(Sekolah::class, 'angkatan_jurusan_sekolahs', 'angkatan_id', 'jurusan_sekolah_id')->withTimestamps();
+    }
+
 }

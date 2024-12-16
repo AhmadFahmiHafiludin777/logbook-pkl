@@ -49,8 +49,23 @@
                     </div>
                 @endforeach
             </fieldset>
-            
-            
+
+            <fieldset class="space-y-4">
+                <legend class="text-base font-bold text-blue-400">Angkatan</legend>
+                @foreach ($angkatan as $item)
+                    <div class="flex items-center space-x-3">
+                        <input 
+                            type="checkbox" 
+                            id="angkatan-{{ $item->id }}" 
+                            name="angkatan[]" 
+                            value="{{ $item->id }}" 
+                            class="w-5 h-5 rounded border-gray-300 focus:ring focus:ring-blue-300 focus:ring-opacity-50"
+                            {{ $sekolah->jurusanSekolah->flatMap->angkatan->contains('id', $item->id) ? 'checked' : '' }}
+                        >
+                        <label for="angkatan-{{ $item->id }}" class="text-sm text-gray-600">{{ $item->tahun }}</label>
+                    </div>
+                @endforeach
+            </fieldset>
 
             <div class="w-full px-4 mt-5">
                 <button type="submit" onclick="return confirm('Anda Yakin Data Akan Diperbarui ?')" class="text-base font-semibold text-white bg-blue-400 py-3 px-8 rounded-full w-full hover:opacity-80 hover:shadow-lg transition duration-500">Update</button>
