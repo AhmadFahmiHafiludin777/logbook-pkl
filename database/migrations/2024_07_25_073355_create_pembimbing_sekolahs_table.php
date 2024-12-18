@@ -15,9 +15,7 @@ return new class extends Migration
             $table->id('id');
             $table->string('nama')->nullable();
             $table->enum('gender', ['L', 'P'])->nullable();
-            $table->unsignedBigInteger('angkatan_jurusan_sekolah_id');
             $table->string('no_telp')->nullable();
-            $table->foreign('angkatan_jurusan_sekolah_id')->references('id')->on('angkatan_jurusan_sekolahs');
             $table->timestamps();
         });
     }

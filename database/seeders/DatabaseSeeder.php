@@ -53,6 +53,15 @@ class DatabaseSeeder extends Seeder
         PembimbingSekolah::factory()->create([
             'nama' => 'farrel_raditya_marset',
         ],);
+
+        
+        $this->call([
+            RolePermissionSeeder::class,
+        ]);
+
+        $this->call([
+            UserSeeder::class,
+        ]);
         // jurusan ::create([
         //     'kode' => 'RPL',
         //     'nama' => 'Rekayasa Perangkat Lunak'

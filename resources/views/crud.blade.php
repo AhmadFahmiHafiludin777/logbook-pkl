@@ -35,23 +35,30 @@
         </a>
         @endcan
 
-        <a href="#" class="w-[85%] md:w-[30%] xl:w-[23%] mx-2">
+        @can('view-siswa')
+        <a href="/siswa" class="w-[85%] md:w-[30%] xl:w-[23%] mx-2">
             <div class="h-40 rounded-2xl bg-white flex mt-6 shadow-2xl hover:font-bold hover:bg-blue-500 transition duration-500">
-                <h4 class="text-3xl m-auto">Data Angkatan</h4>
+                <h4 class="text-3xl m-auto">Data Siswa</h4>
             </div>
         </a>
+        @endcan
 
-        <a href="#" class="w-[85%] md:w-[30%] xl:w-[23%] mx-2">
-            <div class="h-40 rounded-2xl bg-white flex mt-6 shadow-2xl hover:font-bold hover:bg-blue-500 transition duration-500">
-                <h4 class="text-3xl m-auto">Data Angkatan</h4>
-            </div>
-        </a>
+        @can('view-pembimbing-lapangan')
+            <a href="/pembimbingLapangan" class="w-[85%] md:w-[30%] xl:w-[23%] mx-2">
+                <div class="h-40 rounded-2xl bg-white flex flex-col justify-center items-center mt-6 shadow-2xl hover:font-bold hover:bg-blue-500 transition duration-500">
+                    <h4 class="text-3xl text-center whitespace-normal break-words">Data Pembimbing Lapangan</h4>
+                </div>
+            </a>
+        @endcan
 
-        <a href="#" class="w-[85%] md:w-[30%] xl:w-[23%] mx-2">
-            <div class="h-40 rounded-2xl bg-white flex mt-6 shadow-2xl hover:font-bold hover:bg-blue-500 transition duration-500">
-                <h4 class="text-3xl m-auto">Data Angkatan</h4>
+
+        @can('view-pembimbing-sekolah')
+        <a href="/pembimbingSekolah" class="w-[85%] md:w-[30%] xl:w-[23%] mx-2">
+            <div class="h-40 rounded-2xl bg-white flex flex-col justify-center items-center mt-6 shadow-2xl hover:font-bold hover:bg-blue-500 transition duration-500">
+                <h4 class="text-3xl text-center whitespace-normal break-words">Data Pembimbing Sekolah</h4>
             </div>
         </a>
+    @endcan
 
         <a href="#" class="w-[85%] md:w-[30%] xl:w-[23%] mx-2">
             <div class="h-40 rounded-2xl bg-white flex mt-6 shadow-2xl hover:font-bold hover:bg-blue-500 transition duration-500">

@@ -27,12 +27,5 @@ class AngkatanJurusanSekolah extends Model
         return $this->hasMany(Jadwal::class);
     }
 
-    public function pembimbingSekolah(){
-        return $this->hasMany(PembimbingSekolah::class);
-    }
-
-    public function pembimbingLapangan(){
-        return $this->hasMany(PembimbingLapangan::class);
-    }
 
 }

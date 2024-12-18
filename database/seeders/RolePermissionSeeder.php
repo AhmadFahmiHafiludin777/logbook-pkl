@@ -18,7 +18,11 @@ class RolePermissionSeeder extends Seeder
             'view-angkatan', 'create-angkatan', 'edit-angkatan', 'delete-angkatan',
             'view-sekolah', 'create-sekolah', 'edit-sekolah', 'delete-sekolah',
             'view-jurusan', 'create-jurusan', 'edit-jurusan', 'delete-jurusan',
-            'view-user', 'create-user', 'edit-user', 'delete-user', 'impersonate-user'
+            'view-user', 'create-user', 'edit-user', 'delete-user', 'impersonate-user',
+            'view-siswa', 'create-siswa', 'edit-siswa', 'delete-siswa',
+            'view-pembimbing-sekolah', 'create-pembimbing-sekolah', 'edit-pembimbing-sekolah', 'delete-pembimbing-sekolah',
+            'view-pembimbing-lapangan', 'create-pembimbing-lapangan', 'edit-pembimbing-lapangan', 'delete-pembimbing-lapangan',
+
         ];
 
         foreach($permissions as $permission) {
@@ -36,7 +40,11 @@ class RolePermissionSeeder extends Seeder
             'view-angkatan', 'create-angkatan', 'edit-angkatan', 'delete-angkatan',
             'view-sekolah', 'create-sekolah', 'edit-sekolah', 'delete-sekolah',
             'view-jurusan', 'create-jurusan', 'edit-jurusan', 'delete-jurusan',
-            'view-user'
+            'view-user',
+            'view-siswa', 'create-siswa', 'edit-siswa', 'delete-siswa',
+            'view-pembimbing-sekolah', 'create-pembimbing-sekolah', 'edit-pembimbing-sekolah', 'delete-pembimbing-sekolah',
+            'view-pembimbing-lapangan', 'create-pembimbing-lapangan', 'edit-pembimbing-lapangan', 'delete-pembimbing-lapangan',
+
         ]);
 
         $pembimbingPKL->givePermissionTo(['view-angkatan', 'view-sekolah', 'view-jurusan']);

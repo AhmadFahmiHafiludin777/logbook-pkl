@@ -107,15 +107,6 @@ class AngkatanController extends Controller
             ->rawColumns(['action'])
             ->make(true);
     }
-    
-    
-
-    // public function create() {
-    //     if (!auth()->user()->hasPermissionTo('create-angkatan')) {
-    //         throw UnauthorizedException::forPermissions([]);
-    //     }
-    //     return view('angkatan.create', ['title' => 'Tambah Page']);
-    // }
 
     public function create() {
         abort_if(!auth()->user()->can('create-angkatan'), 403);
@@ -136,7 +127,10 @@ class AngkatanController extends Controller
 
         abort_if(!auth()->user()->can('view-angkatan'), 403);
 
-        $angkatan->load('angkatanJurusanSekolah.jurusanSekolah.sekolah.jurusan');
+        $angkatan->load(['angkatanJurusanSekolah.jurusanSekolah.sekolah' => function ($query) {
+                $query->with('jurusan')->distinct();
+            }
+        ]);
 
         return view('angkatan.show', compact('angkatan'), ['title' => 'Show Page']);
     }

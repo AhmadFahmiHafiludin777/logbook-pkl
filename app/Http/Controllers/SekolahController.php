@@ -38,20 +38,6 @@ class SekolahController extends Controller
         return view('sekolah.create', compact('sekolah', 'jurusan', 'angkatan'),['title' => 'Tambah Page']);
     }
 
-    // public function store(StoreSekolahRequest $request){
-
-    //     $sekolah = Sekolah::create($request->validated());
-
-    //     $sekolah->jurusan()->sync($request->jurusan ?? []);
-
-    //     if($request->has('angkatan')) {
-    //         $sekolah->angkatanJurusanSekolah()->sync($request->angkatan);
-    //     }
-
-    //     return redirect()->route('sekolah.index')->with('success', 'Data sekolah berhasil dibuat');
-
-    // }
-
     public function store(StoreSekolahRequest $request) {
         $sekolah = Sekolah::create($request->validated());
 
@@ -107,20 +93,6 @@ class SekolahController extends Controller
             'title' => 'Edit Sekolah',
         ]);
     }
-
-
-    // public function update(UpdateSekolahRequest $request, Sekolah $sekolah){
-
-    //     $sekolah->update($request->validated());
-
-    //     $sekolah->jurusan()->sync($request->jurusan ?? []);
-
-    //     if($request->has('angkatan')) {
-    //         $sekolah->angkatanJurusanSekolah()->sync($request->angkatan);
-    //     }
-
-    //     return redirect()->route('sekolah.index')->with('success', 'Data sekolah berhasil diupdate');
-    // }
 
     public function update(UpdateSekolahRequest $request, Sekolah $sekolah) {
         $sekolah->update($request->validated());

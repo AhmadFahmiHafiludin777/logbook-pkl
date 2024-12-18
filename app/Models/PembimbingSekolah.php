@@ -13,11 +13,7 @@ class PembimbingSekolah extends Model
 {
     use HasFactory;
     
-    protected $fillable = ['nama', 'gender', 'angkatan_jurusan_sekolah_id', 'no_telp'];
-
-    public function angkatanJurusanSekolah(){
-        return $this->belongsTo(AngkatanJurusanSekolah::class);
-    }
+    protected $fillable = ['nama', 'no_telp'];
 
     public function siswa(){
         return $this->hasMany(Siswa::class);

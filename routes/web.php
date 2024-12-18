@@ -2,8 +2,11 @@
 
 use App\Http\Controllers\AngkatanController;
 use App\Http\Controllers\JurusanController;
+use App\Http\Controllers\PembimbingLapanganController;
+use App\Http\Controllers\PembimbingSekolahController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SekolahController;
+use App\Http\Controllers\SiswaController;
 use App\Http\Controllers\UserController;
 use App\Models\Angkatan;
 use App\Models\Jadwal;
@@ -68,6 +71,16 @@ Route::middleware(['auth', 'verified'])->group(function() {
 
     Route::resource('jurusan', JurusanController::class);
     Route::get('/dataJurusan', [JurusanController::class, 'getData'])->name('data.jurusan');
+
+    Route::resource('siswa', SiswaController::class);
+    Route::get('/dataSiswa', [SiswaController::class, 'getData'])->name('data.siswa');
+
+
+    Route::resource('pembimbingLapangan', PembimbingLapanganController::class);
+    Route::get('/dataPembimbingLapangan', [PembimbingLapanganController::class, 'getData'])->name('data.pembimbingLapangan');
+
+    Route::resource('pembimbingSekolah', PembimbingSekolahController::class);
+    Route::get('/dataPembimbingSekolah', [PembimbingSekolahController::class, 'getData'])->name('data.pembimbingSekolah');
 
     Route::resource('user', UserController::class);
     Route::get('/dataUser', [UserController::class, 'getData'])->name('data.user');
